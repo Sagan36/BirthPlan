@@ -1,0 +1,1 @@
+print("Shits crazy")
