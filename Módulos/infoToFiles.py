@@ -1,8 +1,8 @@
 #-*- coding: utf-8 -*-
 
 # 2023-2024 Programação 1 (LTI)
-# Grupo 546
-# 75000 Alberto Albertino 
+# Grupo 160
+# 62214 Luís Lima
 # 75001 Maria Marisa
 
 
