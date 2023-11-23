@@ -1,15 +1,17 @@
 #-*- coding: utf-8 -*-
 
 # 2023-2024 Programação 1 (LTI)
-# Grupo 546
-# 75000 Alberto Albertino 
+# Grupo 160
+# 62214 Luís Lima
 # 75001 Maria Marisa
 
 
 
 def hourToInt(time):
     """
-
+    Converts the hours in time to an int
+    Requires: time to be a str in the format HHhMM, where H is hours and M minutes
+    Ensures: returns the HH as a int
     """
     t = time.split("h")
     return int(t[0])
@@ -18,15 +20,20 @@ def hourToInt(time):
 
 def minutesToInt(time):
     """
-
+    Converts the minutes in time to an int
+    Requires: time to be a str in the format HHhMM, where H is hours and M minutes
+    Ensures: returns the MM as a int
     """
-    pass #TODO
+    t = time.slit("h")
+    return int(h[1])
     
 
 
 def intToTime(hour, minutes):
     """
-
+    Converts the two int's given to a str in the format HHhMM, where H is hours and M minutes
+    Requires: hour and minutes are int's, hour < 12 and minutes < 60 
+    Ensures: a str in the format HHhMM
     """
     h = str(hour)
     m = str(minutes)

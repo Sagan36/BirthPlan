@@ -1,11 +1,30 @@
 #-*- coding: utf-8 -*-
 
 # 2023-2024 Programação 1 (LTI)
-# Grupo 546
-# 75000 Alberto Albertino 
+# Grupo 160
+# 62214 Luís Lima
 # 75001 Maria Marisa
 
+def removeHeader(fileName):
+    '''
+    Removes the lines of the header of the fileName
+    Requires: fileName to be a existing file in the same directory of the module
+    Ensures: Removes the header lines from the file
+    '''
 
+    inFile = open(fileName, 'r')
+    outFile = open(fileName, 'w')
+
+    allLines = inFile.readlines()
+    noHeaderLines = allLines[7:]
+
+    outFile.writelines(noHeaderLines)
+
+    outFile.close()
+    inFile.close()
+
+teste = removeHeader('doctors10h00-Copy')
+print(teste.read())
 
 def readDoctorsFile(fileName):
     """
