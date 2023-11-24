@@ -1,5 +1,5 @@
 ﻿Organization:
-Smart
+SmartH
 Hour:
 10h00
 Day: 

@@ -13,18 +13,17 @@ def removeHeader(fileName):
     '''
 
     inFile = open(fileName, 'r')
-    outFile = open(fileName, 'w')
 
     allLines = inFile.readlines()
     noHeaderLines = allLines[7:]
-
+    
+    outFile = open(fileName, 'w')
     outFile.writelines(noHeaderLines)
 
     outFile.close()
     inFile.close()
 
-teste = removeHeader('doctors10h00-Copy.txt')
-print(teste.read())
+teste = removeHeader('Módulos/doctors10h00-Copy.txt')
 
 def readDoctorsFile(fileName):
     """
