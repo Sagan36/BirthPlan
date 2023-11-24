@@ -25,7 +25,7 @@ def minutesToInt(time):
     Ensures: returns the MM as a int
     """
     t = time.slit("h")
-    return int(h[1])
+    return int(t[1])
     
 
 
