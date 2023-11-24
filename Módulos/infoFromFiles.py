@@ -23,7 +23,7 @@ def removeHeader(fileName):
     outFile.close()
     inFile.close()
 
-teste = removeHeader('doctors10h00-Copy')
+teste = removeHeader('doctors10h00-Copy.txt')
 print(teste.read())
 
 def readDoctorsFile(fileName):
