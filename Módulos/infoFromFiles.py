@@ -23,7 +23,11 @@ def removeHeader(fileName):
     outFile.writelines(noHeaderLines)
 
     inFile.close()
+<<<<<<< HEAD
     return outFile
+=======
+
+>>>>>>> a1fb39d22055279959792cfa60d3c1d418160ecc
 
 def readDoctorsFile(fileName):
     """
@@ -57,5 +61,6 @@ def readRequestsFile(fileName):
 
     return requestsList
 
+print(readRequestsFile("doctors10h00-Copy"))
 
 print(readRequestsFile("doctors10h00-Copy.txt"))
