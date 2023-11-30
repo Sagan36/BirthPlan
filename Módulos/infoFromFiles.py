@@ -5,29 +5,21 @@
 # 62214 Luís Lima
 # 62269 Dinis Garcia
 
-import copy
 
-def removeHeader(fileName):
+def removeHeader(fileOpen):
     '''
     Removes the lines of the header of the fileName
     Requires: fileName to be a existing file in the same directory of the module
     Ensures: Removes the header lines from the file
     '''
 
-    inFile = open(fileName, 'r')
-
-    allLines = inFile.readlines()
+    allLines = fileOpen.readlines()
     noHeaderLines = allLines[7:]
     
-    outFile = copy.deepcopy(inFile)
-    outFile.writelines(noHeaderLines)
+    fileOpen.close()
 
-    inFile.close()
-<<<<<<< HEAD
-    return outFile
-=======
+    return noHeaderLines
 
->>>>>>> a1fb39d22055279959792cfa60d3c1d418160ecc
 
 def readDoctorsFile(fileName):
     """
@@ -52,7 +44,7 @@ def readRequestsFile(fileName):
     
     """
 
-    inFile = removeHeader(fileName)       
+    inFile = removeHeader(open(fileName,"r"))       
 
     requestsList = [] 
     for line in inFile:
@@ -61,6 +53,5 @@ def readRequestsFile(fileName):
 
     return requestsList
 
-print(readRequestsFile("doctors10h00-Copy"))
 
 print(readRequestsFile("doctors10h00-Copy.txt"))
