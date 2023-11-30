@@ -23,7 +23,6 @@ def removeHeader(fileName):
     outFile.close()
     inFile.close()
 
-teste = removeHeader('Módulos/doctors10h00-Copy.txt')
 
 def readDoctorsFile(fileName):
     """
@@ -48,7 +47,7 @@ def readRequestsFile(fileName):
     
     """
 
-    inFile = removeHeader(open(fileName, "r"))       
+    inFile = removeHeader(fileName)       
 
     requestsList = [] 
     for line in inFile:
@@ -57,4 +56,5 @@ def readRequestsFile(fileName):
 
     return requestsList
 
+print(readRequestsFile("doctors10h00-Copy"))
 
