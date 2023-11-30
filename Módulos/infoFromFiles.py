@@ -42,7 +42,13 @@ def readDoctorsFile(fileName):
     the file fileName (with all the info pieces belonging to that doctor),
     following the order provided in the lines of the file.
     """
-
+    inFile = removeHeader(fileName) 
+    
+    DoctorsList=[]
+    for line in inFile:
+        doctorInfo
+    
+    
 
 
 def readRequestsFile(fileName):
