@@ -1,9 +1,9 @@
 #-*- coding: utf-8 -*-
 
 # 2023-2024 Programação 1 (LTI)
-# Grupo 546
-# 75000 Alberto Albertino 
-# 75001 Maria Marisa
+# Grupo 160
+# 62214 Luís Lima
+# 62269 Dinis Garcia
 
 
 def updateSchedule(doctors, requests, previousSched, nextSched):
