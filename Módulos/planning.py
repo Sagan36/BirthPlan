@@ -13,7 +13,7 @@ def updateSchedule(doctors, requests, previousSched, nextSched):
 	
 	Requires:
 	doctors is a list of lists with the structure as in the output of
-	infoFromFiles.readSkipersFile concerning the time of previous schedule;
+	infoFromFiles.readDoctorsFile concerning the time of previous schedule;
 	requests is a list of lists with the structure as in the output of 
 	infoFromFile.readRequestsFile concerning the current update time;
 	previousSched is a list of lists with the structure as in the output of
