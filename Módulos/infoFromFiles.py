@@ -3,7 +3,9 @@
 # 2023-2024 Programação 1 (LTI)
 # Grupo 160
 # 62214 Luís Lima
-# 75001 Maria Marisa
+# 62269 Dinis Garcia
+
+import copy
 
 def removeHeader(fileName):
     '''
@@ -17,13 +19,11 @@ def removeHeader(fileName):
     allLines = inFile.readlines()
     noHeaderLines = allLines[7:]
     
-    outFile = open(fileName, 'w')
+    outFile = copy.deepcopy(inFile)
     outFile.writelines(noHeaderLines)
 
-    outFile.close()
     inFile.close()
-
-teste = removeHeader('Módulos/doctors10h00-Copy.txt')
+    return outFile
 
 def readDoctorsFile(fileName):
     """
@@ -48,7 +48,7 @@ def readRequestsFile(fileName):
     
     """
 
-    inFile = removeHeader(open(fileName, "r"))       
+    inFile = removeHeader(fileName)       
 
     requestsList = [] 
     for line in inFile:
@@ -58,3 +58,4 @@ def readRequestsFile(fileName):
     return requestsList
 
 
+print(readRequestsFile("doctors10h00-Copy.txt"))
