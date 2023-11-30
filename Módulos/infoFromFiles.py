@@ -49,7 +49,6 @@ def readRequestsFile(fileName):
     """
     Reads a file with a list of requested assistances with a given file name into a collection.
 
-    
     """
 
     inFile = removeHeader(open(fileName,"r"))       
