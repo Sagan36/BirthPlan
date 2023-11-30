@@ -46,8 +46,10 @@ def readDoctorsFile(fileName):
     
     DoctorsList=[]
     for line in inFile:
-        doctorInfo
+        doctorInfo = line.rstrip().split(", ")
+        DoctorList.append(doctorInfo)
     
+    return DoctorsList     
     
 
 
