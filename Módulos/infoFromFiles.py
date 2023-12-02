@@ -6,7 +6,9 @@
 # 62269 Dinis Garcia
 
 #ERROS:
-#Quando lê as linhas do ficheiro, tbm lê as linhas vazias, o que resulta em ter listas do tipo [""]
+#Quando lê as linhas do ficheiro, tbm lê as linhas vazias, o que resulta em ter listas do tipo [""] 
+#O QUE FIZ
+#dei fix no erro mas ve se concordas antes de por em todas as funções
 def removeHeader(fileOpen):
     '''
     Removes the lines of the header of the fileName
@@ -71,9 +73,9 @@ def readScheduleFile(fileName):
 
     previousSched = [] 
     for line in inFile:
-        scheduleData = line.rstrip().split(", ")
-        previousSched.append(scheduleData)        
-
+        if line.strip(): #Tipo isto ve se existe algum caraters na linha que esta a analisar e se existir faz o codigo abaixo se nao nao o faz, foi ao chat gpt pq a maneira que tinhas dito acho que n tava a funcionar mas tenta tu 
+            scheduleData = line.rstrip().split(", ")# eu acho que este comando é inututil vai dar a mesma merda sem ele 
+            previousSched.append(scheduleData)
     return previousSched
 
 print(readDoctorsFile("./testSets_v2/testSets_v2/testSet1/doctors10h00.txt"))
