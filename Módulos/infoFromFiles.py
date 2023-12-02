@@ -5,7 +5,8 @@
 # 62214 Luís Lima
 # 62269 Dinis Garcia
 
-
+#ERROS:
+#Quando lê as linhas do ficheiro, tbm lê as linhas vazias, o que resulta em ter listas do tipo [""]
 def removeHeader(fileOpen):
     '''
     Removes the lines of the header of the fileName
@@ -39,7 +40,7 @@ def readDoctorsFile(fileName):
     DoctorsList=[]
     for line in inFile:
         doctorInfo = line.rstrip().split(", ")
-        DoctorList.append(doctorInfo)
+        DoctorsList.append(doctorInfo)
     
     return DoctorsList     
     
@@ -60,5 +61,19 @@ def readRequestsFile(fileName):
 
     return requestsList
 
+def readScheduleFile(fileName):
+    """
+    Reads a file with a list of requested assistances with a given file name into a collection.
 
-print(readRequestsFile("doctors10h00-Copy.txt"))
+    """
+
+    inFile = removeHeader(open(fileName,"r"))       
+
+    previousSched = [] 
+    for line in inFile:
+        scheduleData = line.rstrip().split(", ")
+        previousSched.append(scheduleData)        
+
+    return previousSched
+
+print(readDoctorsFile("./testSets_v2/testSets_v2/testSet1/doctors10h00.txt"))
