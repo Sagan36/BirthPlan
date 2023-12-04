@@ -26,9 +26,17 @@ NUM_HEADER_LINES = 7
 # In a doctor's list:
 # Index of the element with the docotor's name
 DOCT_NAME_IDX = 0
+DOCT_EXP_IDX = 1 
+DOCT_LASTBIRTH_IDX = 2
+DOCT_ACCUMULATOR_IDX = 3 #as horas e os minutos acumulados desde o último descanso semanal, relativos aos partos que lhes estão atribuídos e que está a realizar ou ainda vai realizar
+DOCT_LASTREST_IDX = 4 #; as horas e os minutos acumulados desde o último descanso semanal, relativos aos partos que lhes estão atribuídos e que está a realizar ou ainda vai realizar 
 
 # In a mother's list:
 # Index of the element with the mother's name
 MOTH_NAME_IDX = 0
+MOTH_AGE_IDX = 1
+MOTH_COLOR_IDX = 2
+MOTH_RISK_IDX = 3
+
 
 
