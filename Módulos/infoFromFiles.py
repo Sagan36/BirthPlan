@@ -9,6 +9,8 @@
 #Quando lê as linhas do ficheiro, tbm lê as linhas vazias, o que resulta em ter listas do tipo [""] 
 #O QUE FIZ
 #dei fix no erro mas ve se concordas antes de por em todas as funções
+import constants
+
 def removeHeader(fileOpen):
     '''
     Removes the lines of the header of the fileName
@@ -17,7 +19,7 @@ def removeHeader(fileOpen):
     '''
 
     allLines = fileOpen.readlines()
-    noHeaderLines = allLines[7:]
+    noHeaderLines = allLines[constants.NUM_HEADER_LINES:]
     
     fileOpen.close()
 
