@@ -91,7 +91,7 @@ def sortMothers(fileName):
     sortedMoms = readRequestsFile(fileName)
     sortedMoms.sort(key=lambda mother: (str(mother[constants.MOTH_RISK_IDX]), mother[constants.MOTH_COLOR_IDX], (-int(mother[constants.MOTH_AGE_IDX])), mother[constants.MOTH_NAME_IDX]))           
     return sortedMoms
-
+    #-int é para fazer decresecnte
 
 def sortDoctors(fileName):
     '''
