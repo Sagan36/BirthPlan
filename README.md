@@ -4,4 +4,10 @@ Projeto Final do curso de Programação I
 ### Por Fazer:
 
  - Preencher Módulos-esqueletos
- - Escrever o código Main
+ - planning
+ - infoToFiles
+ - Completar contratos de funções
+
+### Erros Conhecidos:
+
+ - 

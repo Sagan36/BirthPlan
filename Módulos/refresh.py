@@ -7,6 +7,7 @@
 
 
 
+
 def plan(doctorsFileName, scheduleFileName, requestsFileName):
     """
     Runs the birthPlan application.

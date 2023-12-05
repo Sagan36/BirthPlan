@@ -21,6 +21,8 @@ WKL_PAUSE = "weekly leave"
 # In a file:
 # Number of header's lines
 NUM_HEADER_LINES = 7
+# Number of line with hour of last refresh
+HOUR_LINE_IDX = 3
 
 
 # In a doctor's list:

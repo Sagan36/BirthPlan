@@ -24,7 +24,7 @@ def minutesToInt(time):
     Requires: time to be a str in the format HHhMM, where H is hours and M minutes
     Ensures: returns the MM as a int
     """
-    t = time.slit("h")
+    t = time.split("h")
     return int(t[1])
     
 
