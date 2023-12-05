@@ -10,6 +10,7 @@
 #O QUE FIZ
 #dei fix no erro mas ve se concordas antes de por em todas as funções
 import constants
+import dateTime
 
 def removeHeader(fileOpen):
     '''
