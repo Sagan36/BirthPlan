@@ -15,8 +15,11 @@ import dateTime
 def removeHeader(fileOpen):
     '''
     Removes the lines of the header of the fileName
-    Requires: fileName to be a existing file in the same directory of the module
-    Ensures: Removes the header lines from the file
+    
+    Requires: 
+    fileOpen to be a file pointer of an existing .txt file.
+    Ensures: 
+    Removes the header lines from the file, which corresponds to the first NUM_HEADER_LINES.
     '''
 
     allLines = fileOpen.readlines()
@@ -25,6 +28,7 @@ def removeHeader(fileOpen):
     fileOpen.close()
 
     return noHeaderLines
+
 
 
 def readDoctorsFile(fileName):
@@ -54,8 +58,16 @@ def readDoctorsFile(fileName):
 
 def readRequestsFile(fileName):
     """
-    Reads a file with a list of requested assistances with a given file name into a collection.
+    Reads a file with a list of requests into a collection.
 
+    Requires:
+    fileName is str with the name of a .txt file containing
+    a list of pending requests organized as in the examples provided in
+    the general specification (omitted here for the sake of readability).
+    Ensures:
+    list of lists where each list corresponds to a request listed in
+    the file fileName (with all the info pieces belonging to that resquest),
+    following the order provided in the lines of the file.
     """
 
     inFile = removeHeader(open(fileName,"r"))       
@@ -68,9 +80,20 @@ def readRequestsFile(fileName):
 
     return requestsList
 
+
+
 def readScheduleFile(fileName):
     """
-    Reads a file with a list of requested assistances with a given file name into a collection.
+    Reads a file with a list of the last schedule into a collection.
+
+    Requires:
+    fileName is str with the name of a .txt file containing
+    a list of previous schedule organized as in the examples provided in
+    the general specification (omitted here for the sake of readability).
+    Ensures:
+    list of lists where each list corresponds to a scheduled parturition listed in
+    the file fileName (with all the info pieces belonging to that parturition),
+    following the order provided in the lines of the file.
 
     """
 
@@ -83,7 +106,7 @@ def readScheduleFile(fileName):
             previousSched.append(scheduleData)
     return previousSched
 
-print(readDoctorsFile("./testSets_v2/testSets_v2/testSet1/doctors10h00.txt"))
+
 
 def sortMothers(fileName):
     '''
@@ -104,3 +127,18 @@ def sortDoctors(fileName):
     sortedDoctors.sort(key= lambda doctor: doctor[constants.DOCT_EXP_IDX])
 
     return sortedDoctors
+
+
+#TESTES:
+print(readDoctorsFile("./testSets_v2/testSets_v2/testSet1/doctors10h30.txt"))
+print()
+
+print(readRequestsFile("./testSets_v2/testSets_v2/testSet1/requests10h30.txt"))
+print()
+
+print(readScheduleFile("./testSets_v2/testSets_v2/testSet1/schedule10h00.txt"))
+print("\nSorted:")
+print(sortDoctors("./testSets_v2/testSets_v2/testSet1/doctors10h30.txt"))
+print()
+
+print(sortMothers("./testSets_v2/testSets_v2/testSet1/requests10h30.txt"))
