@@ -62,9 +62,9 @@ def updateHourHeader(fileOpen):
     return allLines
 
 #Testes
-print(updateHeader(open("./testSets_v2/testSets_v2/testSet1/doctors10h00.txt","r")))
+print(updateHourHeader(open("./testSets_v2/testSets_v2/testSet1/doctors10h00.txt","r")))
 fp = open("teste.txt","w")
-fp.writelines(updateHeader(open("./testSets_v2/testSets_v2/testSet1/doctors10h00.txt","r")))
+fp.writelines(updateHourHeader(open("./testSets_v2/testSets_v2/testSet1/doctors10h00.txt","r")))
 fp.close()
 
 
