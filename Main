@@ -1,1 +1,11 @@
-print("vski")
+def doctorsToMoms(listDocs, listMoms):
+    deepcopy(listas)
+    partutions = []
+    if len(listMoms) == 0:
+        return partutions
+    else:
+        partutions[connect(listDocs,listMoms[0])]
+#       listDocs.update() e listMoms.pop()
+#       add 20 mins
+#       Adicionar doutores que estão novamente disponíveis, no final da lista
+        return doctorsToMoms(listDocs, listMoms)

@@ -10,4 +10,4 @@ Projeto Final do curso de Programação I
 
 ### Erros Conhecidos:
 
- - 
+ - Falta enconding
