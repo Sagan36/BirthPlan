@@ -6,7 +6,7 @@
 # 62269 Dinis Garcia
 
 #ERROS:
-#Quando lê as linhas do ficheiro, tbm lê as linhas vazias, o que resulta em ter listas do tipo [""] 
+#meter ", encoding = "utf-8"  nos opens
 #O QUE FIZ
 #dei fix no erro mas ve se concordas antes de por em todas as funções
 import constants
