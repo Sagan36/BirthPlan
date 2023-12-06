@@ -6,6 +6,11 @@
 # 75001 Maria Marisa
 
 
+# if __name__ == "__main__":
+#   import sys
+#   plan(sys.argv[1],sys.argv[2],...)
+#[refresh.py, arg1, arg2, etc...]
+
 
 
 def plan(doctorsFileName, scheduleFileName, requestsFileName):
