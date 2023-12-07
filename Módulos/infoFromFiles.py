@@ -55,7 +55,6 @@ def readDoctorsFile(fileName):
     return DoctorsList     
     
 
-
 def readRequestsFile(fileName):
     """
     Reads a file with a list of requests into a collection.
@@ -115,7 +114,8 @@ def sortMothers(fileName):
     sortedMoms = readRequestsFile(fileName)
     Color_Order = {"red":1, "yellow":2, "green":3}
     Risk_Order = {"high":1, "medium":2, "low":3}
-    sortedMoms.sort(key=lambda mother: (Risk_Order[mother[constants.MOTH_RISK_IDX]], Color_Order[mother[constants.MOTH_COLOR_IDX]], (-int(mother[constants.MOTH_AGE_IDX])), mother[constants.MOTH_NAME_IDX]))           
+    sortedMoms.sort(key=lambda mother: (Risk_Order[mother[constants.MOTH_RISK_IDX]], Color_Order[mother[constants.MOTH_COLOR_IDX]], \
+                                        (-int(mother[constants.MOTH_AGE_IDX])), mother[constants.MOTH_NAME_IDX]))           
     return sortedMoms
     #-int é para fazer decresecnte
 
@@ -132,15 +132,15 @@ def sortDoctors(fileName):
 
 
 #TESTES:
-print(readDoctorsFile("./testSets_v2/testSets_v2/testSet1/doctors10h30.txt"))
-print()
+#print(readDoctorsFile("./testSets_v2/testSets_v2/testSet2/doctors14h30.txt"))
+# print()
 
-print(readRequestsFile("./testSets_v2/testSets_v2/testSet1/requests10h30.txt"))
-print()
+#print(readRequestsFile("./testSets_v2/testSets_v2/testSet2/requests14h30.txt"))
+# print()
 
-print(readScheduleFile("./testSets_v2/testSets_v2/testSet1/schedule10h00.txt"))
-print("\nSorted:")
-print(sortDoctors("./testSets_v2/testSets_v2/testSet1/doctors10h30.txt"))
-print()
+# print(readScheduleFile("./testSets_v2/testSets_v2/testSet1/schedule10h00.txt"))
+# print("\nSorted:")
+# print(sortDoctors("./testSets_v2/testSets_v2/testSet1/doctors10h30.txt"))
+# print()
 
-print(sortMothers("./testSets_v2/testSets_v2/testSet1/requests10h30.txt"))
+# print(sortMothers("./testSets_v2/testSets_v2/testSet1/requests10h30.txt"))

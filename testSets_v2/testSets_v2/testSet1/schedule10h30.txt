@@ -5,7 +5,7 @@ Hour:
 Day: 
 10:12:2023
 Schedule:
-10h30, Alberta Asunção, Carlos Castro
-10h40, Brunilde Bastos, Bernardo Biscaia
-10h50, Carlota Cunha, Carlos Castro
+10h10, Alberta Asunção, Bernardo Biscaia
+10h20, Brunilde Bastos, Carlos Castro
+10h30, Carlota Cunha, Duarte Dantas
 10h50, Fernanda Fonseca, Abílio Amaral

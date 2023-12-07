@@ -21,7 +21,7 @@ def updateSchedule(doctors, requests, previousSched, nextSched):
 	Ensures:
 	a list of birth assistances, representing the schedule updated at
 	the current update time (= previous update time + 30 minutes),
-	assigned according to the conditions indicated in the general specification
+	assigned according to the conditions indicated in the general specification 
 	of the project (omitted here for the sake of readability).
 	"""
 

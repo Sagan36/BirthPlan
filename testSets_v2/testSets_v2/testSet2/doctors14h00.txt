@@ -9,4 +9,3 @@ Guilherme Gaspar, 2, 14h20, 40, 39h50
 Horácio Horta, 3, 14h20, 120, 7h20
 Ildefonso Inácio, 2, 14h20, 40, 39h50
 José Justo, 2, 14h20, 40, 15h00
-
