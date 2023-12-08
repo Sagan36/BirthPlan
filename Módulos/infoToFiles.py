@@ -10,16 +10,22 @@ import dateTime
 import infoFromFiles as iF #PARA TESTAR, RETIRAR DPS!!
 
 
-def updateHourHeader(header):
+
+def updateHeader(fileName):
     """
     Updates the hours of last modified hour in header of file.
 
     Requires:
-    fileOpen is a file pointer to a non-empty .txt file.
+    fileName is the name of a  non-empty .txt file.
     Ensures:
-    Adds 30 minutes to the hours in header of the file and returns the
-    list of lines of header and the new hour in str.
+    Adds 30 minutes to the hours in the header of the file and returns
+    it in a str 
+    Returns the calculated new hour in str.
     """
+    fp = open(fileName,"r")
+    fileList = fp.readlines()
+    header = fileList[:constants.NUM_HEADER_LINES]
+
     lastHour = header[constants.HOUR_LINE_IDX]
     minutes = dateTime.minutesToInt(lastHour)
     hours = dateTime.hourToInt(lastHour)
@@ -33,13 +39,25 @@ def updateHourHeader(header):
         newHour = dateTime.intToTime(hours,minutes)
 
     header[constants.HOUR_LINE_IDX] = newHour + "\n"
+
+    headerStr = str()
+    for i in header:
+        headerStr += i
     
-    return header, newHour
+    fp.close()
+    return headerStr, newHour
 
 
-print(iF.readDoctorsFile("./testSets_v2/testSets_v2/testSet3/doctors16h00.txt"))
-print(iF.readRequestsFile("./testSets_v2/testSets_v2/testSet2/requests14h30.txt"))
-print(iF.readScheduleFile("./testSets_v2/testSets_v2/testSet2/schedule14h30.txt"))
+
+def updatedName(fileName):
+    """
+    """
+    newHour = updateHeader(fileName)[1]
+
+
+# print(iF.readDoctorsFile("./testSets_v2/testSets_v2/testSet3/doctors16h00.txt"))
+# print(iF.readRequestsFile("./testSets_v2/testSets_v2/testSet2/requests14h30.txt"))
+# print(iF.readScheduleFile("./testSets_v2/testSets_v2/testSet2/schedule14h30.txt"))
 
 
 def writeScheduleFile(sched, header, fileName):
@@ -59,23 +77,44 @@ def writeScheduleFile(sched, header, fileName):
     the lines in this file keeps the ordering top to bottom of 
     the assistances as ordered head to tail in sched.
     """
+    schedStr=str()
+    for i in sched:
+        for j in i:
+            
+            if j != i[0]:
+                schedStr += ", "
+            schedStr = schedStr + j
+            
+        schedStr += "\n"
 
-    updatedHead, updatedHour = updateHourHeader(header)
-    updatedName = fileName[-1:-9] + updatedHour + ".txt"
-
-    allLines = updatedHead + "\n" + sched
-    fp = open(updatedName,"w")
+    allLines = header + schedStr
+    fp = open(fileName,"w")
     fp.writelines(allLines)
 
     fp.close()
 
 
 
-writeScheduleFile()
-
 def writeDoctorsFile(doctors, header, fileName):
     """
+    Writes a collection of informations of doctors into a file.
+    #Escrever o resto com o planning feito
     """
+    docStr=str()
+    for i in doctors:
+        for j in i:
+            
+            if j != i[0]:
+                docStr += ", "
+            docStr = docStr + j
+            
+        docStr += "\n"
+
+    allLines = header + docStr
+    fp = open(fileName,"w")
+    fp.writelines(allLines)
+
+    fp.close()
 
 
 #Testes
@@ -84,5 +123,10 @@ def writeDoctorsFile(doctors, header, fileName):
 # fp.writelines(updateHourHeader(open("./testSets_v2/testSets_v2/testSet1/doctors10h00.txt","r")))
 # fp.close()
 
+x = updateHeader("./testSets_v2/testSets_v2/testSet2/schedule14h00.txt")
+writeScheduleFile([['14h30', 'GraÃ§a GonÃ§alves', 'HorÃ¡cio Horta'], ['14h30', 'HortÃªnsia Holmes', 'JosÃ© Justo'],\
+                ['14h30', 'Irene IlÃ\xaddio', 'Guilherme Gaspar'], ['14h30', 'Joana Joanes', 'Ildefonso InÃ¡cio']],x,"teste.txt")
 
+x = updateHeader("./testSets_v2/testSets_v2/testSet2/doctors14h00.txt")
+writeScheduleFile([['Manuel Machado', '3', '16h30', '120', '39h40'], ['Orlando Oliveira', '3', '16h40', '80', '39h20']],x,"teste.txt")
     
