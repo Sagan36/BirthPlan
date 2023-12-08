@@ -45,17 +45,34 @@ def updateHeader(fileName):
         headerStr += i
     
     fp.close()
-    return headerStr, newHour
+    return headerStr
 
 
 
 def updatedName(fileName):
     """
     """
-    newHour = updateHeader(fileName)[1]
-    
+    fp = open(fileName,"r")
+    linesList = fp.readlines()
+
+    lastHour = linesList[constants.HOUR_LINE_IDX]
+    minutes = dateTime.minutesToInt(lastHour)
+    hours = dateTime.hourToInt(lastHour)
+
+    if minutes == 30:
+        hours += 1
+        minutes = 0
+        newHour = dateTime.intToTime(hours,minutes)
+    else:
+        minutes += 30
+        newHour = dateTime.intToTime(hours,minutes)
+
+    newName = fileName[:constants.NAME_HOUR_CHAR] + newHour + ".txt"
+
+    return newName
 
 
+print(updatedName("./testSets_v2/testSets_v2/testSet3/doctors16h00.txt"))
 
 # print(iF.readDoctorsFile("./testSets_v2/testSets_v2/testSet3/doctors16h00.txt"))
 # print(iF.readRequestsFile("./testSets_v2/testSets_v2/testSet2/requests14h30.txt"))

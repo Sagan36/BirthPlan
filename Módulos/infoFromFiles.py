@@ -106,11 +106,10 @@ def readScheduleFile(fileName):
 
 
 
-def sortMothers(fileName):
+def sortMothers(sortedMoms):
     '''
-    Sorts Moms 
+    Organizes the 
     '''
-    sortedMoms = readRequestsFile(fileName)
     Color_Order = {"red":1, "yellow":2, "green":3}
     Risk_Order = {"high":1, "medium":2, "low":3}
     sortedMoms.sort(key=lambda mother: (Risk_Order[mother[constants.MOTH_RISK_IDX]], Color_Order[mother[constants.MOTH_COLOR_IDX]], \

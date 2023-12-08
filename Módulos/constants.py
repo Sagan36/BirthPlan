@@ -23,6 +23,8 @@ WKL_PAUSE = "weekly leave"
 NUM_HEADER_LINES = 7
 # Index of line with hour of last refresh
 HOUR_LINE_IDX = 3
+#Number of characters correponding to the hour in a file's name + ".txt":
+NAME_HOUR_CHAR = -10 #Last 10 digits
 
 
 # In a doctor's list:
