@@ -5,8 +5,6 @@
 # 62214 Luís Lima
 # 75001 Maria Marisa
 
-
-
 def hourToInt(time):
     """
     Converts the hours in time to an int
@@ -47,7 +45,15 @@ def intToTime(hour, minutes):
     return h + "h" + m
 
 
+def timeToMinutes(time):
+    """
+    """
+    hours = hourToInt(time)
+    minutes = minutesToInt(time)
 
+    totalMin = minutes + (hours * 60)
+
+    return totalMin
 
 
 

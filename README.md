@@ -8,6 +8,7 @@ Projeto Final do curso de Programação I
  - infoToFiles
  - Completar contratos de funções
  - getHeader
+ - Adicionar Exceção
 
 ### Erros Conhecidos:
 

@@ -10,7 +10,6 @@
 #O QUE FIZ
 #dei fix no erro mas ve se concordas antes de por em todas as funções
 import constants
-import dateTime
 
 def removeHeader(fileOpen):
     '''
@@ -118,18 +117,6 @@ def sortMothers(fileName):
                                         (-int(mother[constants.MOTH_AGE_IDX])), mother[constants.MOTH_NAME_IDX]))           
     return sortedMoms
     #-int é para fazer decresecnte
-
-def sortDoctors(fileName):
-    '''
-    Sorts Doctors 
-    '''
-    #num estado muito rudimentar ainda 
-    sortedDoctors = readDoctorsFile(fileName)
-    
-    sortedDoctors.sort(key= lambda doctor: doctor[constants.DOCT_EXP_IDX])
-
-    return sortedDoctors
-
 
 #TESTES:
 #print(readDoctorsFile("./testSets_v2/testSets_v2/testSet2/doctors14h30.txt"))
