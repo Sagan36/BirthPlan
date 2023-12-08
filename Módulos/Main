@@ -1,0 +1,32 @@
+def doctorsToMoms(listDocs, listMoms):
+    deepcopy(listas)
+    partutions = []
+    if len(listMoms) == 0:
+        return partutions
+    else:
+        partutions[connect(listDocs,listMoms[0])]
+#       listDocs.update() e listMoms.pop()
+#       add 20 mins
+#       Adicionar doutores que estão novamente disponíveis, no final da lista
+        return doctorsToMoms(listDocs, listMoms)
+import dateTime
+import infoFromFiles
+import constants
+
+#sorted_Mothers = infoFromFiles.sortMothers("requests16h30.txt")
+sorted_Doctors = infoFromFiles.readDoctorsFile("./testSets_v2/testSets_v2/testSet4/doctors18h00.txt")
+
+
+
+#print(dateTime.hourToInt("13h10"))
+#print(dateTime.minutesToInt("10h30"))
+
+#print(sorted_Doctors)
+
+
+
+sorted_Doctors.sort(key=lambda doctor: (doctor[constants.DOCT_LASTBIRTH_IDX], (-int(doctor[constants.DOCT_EXP_IDX])), doctor[constants.DOCT_ACCUMULATOR_IDX], doctor[constants.DOCT_LASTREST_IDX], doctor[constants.DOCT_NAME_IDX]))
+
+
+
+print(sorted_Doctors)
