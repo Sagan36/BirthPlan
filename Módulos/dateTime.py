@@ -48,11 +48,13 @@ def intToTime(hour, minutes):
 def timeToMinutes(time):
     """
     """
-    hours = hourToInt(time)
-    minutes = minutesToInt(time)
-
-    totalMins = minutes + (hours * 60)
-
+    if time == "weekly leave":
+        totalMins = 9999
+    else:
+        hours = hourToInt(time)
+        minutes =minutesToInt(time)
+        totalMins = minutes + (hours * 60)
+    
     return totalMins
 
 

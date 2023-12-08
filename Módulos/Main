@@ -1,3 +1,4 @@
+
 def doctorsToMoms(listDocs, listMoms):
     deepcopy(listas)
     partutions = []
@@ -14,7 +15,7 @@ import infoFromFiles
 import constants
 
 #sorted_Mothers = infoFromFiles.sortMothers("requests16h30.txt")
-sorted_Doctors = infoFromFiles.readDoctorsFile("./testSets_v2/testSets_v2/testSet4/doctors18h00.txt")
+sorted_Doctors = infoFromFiles.readDoctorsFile("./testSets_v2/testSets_v2/testSet2/doctors14h00.txt")
 
 
 
@@ -25,7 +26,7 @@ sorted_Doctors = infoFromFiles.readDoctorsFile("./testSets_v2/testSets_v2/testSe
 
 
 
-sorted_Doctors.sort(key=lambda doctor: (doctor[constants.DOCT_LASTBIRTH_IDX], (-int(doctor[constants.DOCT_EXP_IDX])), doctor[constants.DOCT_ACCUMULATOR_IDX], doctor[constants.DOCT_LASTREST_IDX], doctor[constants.DOCT_NAME_IDX]))
+sorted_Doctors.sort(key=lambda doctor: (dateTime.timeToMinutes(doctor[constants.DOCT_LASTBIRTH_IDX]), (-int(doctor[constants.DOCT_EXP_IDX])), doctor[constants.DOCT_ACCUMULATOR_IDX], doctor[constants.DOCT_LASTREST_IDX], doctor[constants.DOCT_NAME_IDX]))
 
 
 
