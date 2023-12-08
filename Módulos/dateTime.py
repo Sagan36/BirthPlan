@@ -51,9 +51,9 @@ def timeToMinutes(time):
     hours = hourToInt(time)
     minutes = minutesToInt(time)
 
-    totalMin = minutes + (hours * 60)
+    totalMins = minutes + (hours * 60)
 
-    return totalMin
+    return totalMins
 
 
 
