@@ -104,12 +104,13 @@ def readScheduleFile(fileName):
             previousSched.append(scheduleData)
     return previousSched
 
+sortedMoms = readScheduleFile("testSets_v2/testSets_v2/testSet1/requests10h30.txt")
 
-
-def sortMothers(sortedMoms):
+def sortMothers(FileName):
     '''
     Organizes the 
     '''
+    sortedMoms = readScheduleFile(FileName)
     Color_Order = {"red":1, "yellow":2, "green":3}
     Risk_Order = {"high":1, "medium":2, "low":3}
     sortedMoms.sort(key=lambda mother: (Risk_Order[mother[constants.MOTH_RISK_IDX]], Color_Order[mother[constants.MOTH_COLOR_IDX]], \

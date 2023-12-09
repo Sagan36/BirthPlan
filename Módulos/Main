@@ -14,8 +14,8 @@ import dateTime
 import infoFromFiles
 import constants
 
-#sorted_Mothers = infoFromFiles.sortMothers("requests16h30.txt")
-sorted_Doctors = infoFromFiles.readDoctorsFile("./testSets_v2/testSets_v2/testSet2/doctors14h00.txt")
+sorted_Mothers = infoFromFiles.sortMothers("testSets_v2/testSets_v2/testSet1/requests10h30.txt")
+sorted_Doctors = infoFromFiles.readDoctorsFile("testSets_v2/testSets_v2/testSet1/doctors10h00.txt")
 
 
 
@@ -28,6 +28,11 @@ sorted_Doctors = infoFromFiles.readDoctorsFile("./testSets_v2/testSets_v2/testSe
 
 sorted_Doctors.sort(key=lambda doctor: (dateTime.timeToMinutes(doctor[constants.DOCT_LASTBIRTH_IDX]), (-int(doctor[constants.DOCT_EXP_IDX])), doctor[constants.DOCT_ACCUMULATOR_IDX], doctor[constants.DOCT_LASTREST_IDX], doctor[constants.DOCT_NAME_IDX]))
 
-
-
-print(sorted_Doctors)
+season_finale=[]
+for line in sorted_Mothers:
+    if line[constants.MOTH_RISK_IDX] == "high":
+       for line2 in sorted_Doctors:
+            if int(line2[constants.DOCT_EXP_IDX]) >= 2:
+                Mother_Doctor = line[constants.MOTH_NAME_IDX], line2[constants.DOCT_NAME_IDX]
+                season_finale.append(Mother_Doctor)
+print(season_finale)
