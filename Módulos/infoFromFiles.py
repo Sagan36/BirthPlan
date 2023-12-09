@@ -10,7 +10,7 @@
 #O QUE FIZ
 #dei fix no erro mas ve se concordas antes de por em todas as funções
 import constants
-
+import dateTime
 def removeHeader(fileOpen):
     '''
     Removes the lines of the header of the fileName
@@ -27,7 +27,6 @@ def removeHeader(fileOpen):
     fileOpen.close()
 
     return noHeaderLines
-
 
 
 def readDoctorsFile(fileName):
@@ -52,7 +51,7 @@ def readDoctorsFile(fileName):
             DoctorsList.append(doctorInfo)
     
     return DoctorsList     
-    
+#print(readDoctorsFile("testSets_v2/testSets_v2/testSet1/doctors10h00.txt"))    
 
 def readRequestsFile(fileName):
     """
@@ -80,7 +79,7 @@ def readRequestsFile(fileName):
 
 
 
-def readScheduleFile(fileName):
+def readScheduleFile(fileName): #tive que mudar isto pois eu so feio e tambem que eu precisava da hora do header e n sabia como o obtelo entao fiz assim
     """
     Reads a file with a list of the last schedule into a collection.
 
@@ -95,28 +94,36 @@ def readScheduleFile(fileName):
 
     """
 
-    inFile = removeHeader(open(fileName,"r"))       
-
+    inFile = removeHeader(open(fileName,"r"))
+    HourLine = dateTime.getHeaderHour(fileName)       
     previousSched = [] 
     for line in inFile:
         if line.strip(): #Tipo isto ve se existe algum caraters na linha que esta a analisar e se existir faz o codigo abaixo se nao nao o faz, foi ao chat gpt pq a maneira que tinhas dito acho que n tava a funcionar mas tenta tu 
             scheduleData = line.rstrip().split(", ")# eu acho que este comando é inututil vai dar a mesma merda sem ele 
             previousSched.append(scheduleData)
+    previousSched.append(HourLine)
     return previousSched
 
-sortedMoms = readScheduleFile("testSets_v2/testSets_v2/testSet1/requests10h30.txt")
+#print(readScheduleFile("testSets_v2/testSets_v2/testSet1/schedule10h00.txt"))
 
 def sortMothers(FileName):
     '''
     Organizes the 
     '''
-    sortedMoms = readScheduleFile(FileName)
+    sortedMoms = readRequestsFile(FileName)
     Color_Order = {"red":1, "yellow":2, "green":3}
     Risk_Order = {"high":1, "medium":2, "low":3}
     sortedMoms.sort(key=lambda mother: (Risk_Order[mother[constants.MOTH_RISK_IDX]], Color_Order[mother[constants.MOTH_COLOR_IDX]], \
                                         (-int(mother[constants.MOTH_AGE_IDX])), mother[constants.MOTH_NAME_IDX]))           
     return sortedMoms
     #-int é para fazer decresecnte
+def sortDoctors(FileName):
+    '''
+    '''
+    sorted_Doctors = readDoctorsFile(FileName)
+    sorted_Doctors.sort(key=lambda doctor: (dateTime.timeToMinutes(doctor[constants.DOCT_LASTBIRTH_IDX]), (-int(doctor[constants.DOCT_EXP_IDX])), doctor[constants.DOCT_ACCUMULATOR_IDX], doctor[constants.DOCT_LASTREST_IDX], doctor[constants.DOCT_NAME_IDX]))
+
+    return sorted_Doctors
 
 #TESTES:
 #print(readDoctorsFile("./testSets_v2/testSets_v2/testSet2/doctors14h30.txt"))

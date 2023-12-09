@@ -24,7 +24,7 @@ NUM_HEADER_LINES = 7
 # Index of line with hour of last refresh
 HOUR_LINE_IDX = 3
 #Number of characters correponding to the hour in a file's name + ".txt":
-NAME_HOUR_CHAR = -10 #Last 10 digits
+NAME_HOUR_CHAR = -9 #Last 9 digits
 
 
 # In a doctor's list:
@@ -41,6 +41,14 @@ MOTH_NAME_IDX = 0
 MOTH_AGE_IDX = 1
 MOTH_COLOR_IDX = 2
 MOTH_RISK_IDX = 3
+
+#schedule constants 
+
+SCHE_HOUR_IDX = 0
+SCHE_MOTHER_IDX = 1
+SCHE_DOCTOR_IDX = 2
+SCHE_HOUROFTHEHEADER_IDX = 3
+
 
 
 

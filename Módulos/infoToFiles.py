@@ -72,7 +72,7 @@ def updatedName(fileName):
     return newName
 
 
-print(updatedName("./testSets_v2/testSets_v2/testSet3/doctors16h00.txt"))
+#print(updatedName("./testSets_v2/testSets_v2/testSet3/doctors16h00.txt"))
 
 # print(iF.readDoctorsFile("./testSets_v2/testSets_v2/testSet3/doctors16h00.txt"))
 # print(iF.readRequestsFile("./testSets_v2/testSets_v2/testSet2/requests14h30.txt"))
@@ -137,15 +137,16 @@ def writeDoctorsFile(doctors, header, fileName):
 
 
 #Testes
-# print(updateHourHeader(open("./testSets_v2/testSets_v2/testSet1/doctors10h00.txt","r")))
-# fp = open("teste.txt","w")
+#print(updateHourHeader(open("./testSets_v2/testSets_v2/testSet1/doctors10h00.txt","r")))
+#fp = open("teste.txt","w")
 # fp.writelines(updateHourHeader(open("./testSets_v2/testSets_v2/testSet1/doctors10h00.txt","r")))
 # fp.close()
 
-x = updateHeader("./testSets_v2/testSets_v2/testSet2/schedule14h00.txt")
-writeScheduleFile([['14h30', 'GraÃ§a GonÃ§alves', 'HorÃ¡cio Horta'], ['14h30', 'HortÃªnsia Holmes', 'JosÃ© Justo'],\
-                ['14h30', 'Irene IlÃ\xaddio', 'Guilherme Gaspar'], ['14h30', 'Joana Joanes', 'Ildefonso InÃ¡cio']],x,"teste.txt")
+#
+# x = updateHeader("./testSets_v2/testSets_v2/testSet2/schedule14h00.txt")
+#writeScheduleFile([['14h30', 'GraÃ§a GonÃ§alves', 'HorÃ¡cio Horta'], ['14h30', 'HortÃªnsia Holmes', 'JosÃ© Justo'],\
+                #['14h30', 'Irene IlÃ\xaddio', 'Guilherme Gaspar'], ['14h30', 'Joana Joanes', 'Ildefonso InÃ¡cio']],x,"teste.txt")
 
-x = updateHeader("./testSets_v2/testSets_v2/testSet2/doctors14h00.txt")
-writeScheduleFile([['Manuel Machado', '3', '16h30', '120', '39h40'], ['Orlando Oliveira', '3', '16h40', '80', '39h20']],x,"teste.txt")
+#x = updateHeader("./testSets_v2/testSets_v2/testSet2/doctors14h00.txt")
+#writeScheduleFile([['Manuel Machado', '3', '16h30', '120', '39h40'], ['Orlando Oliveira', '3', '16h40', '80', '39h20']],x,"teste.txt")
     

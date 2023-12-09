@@ -5,6 +5,7 @@
 # 62214 Luís Lima
 # 75001 Maria Marisa
 
+import constants
 def hourToInt(time):
     """
     Converts the hours in time to an int
@@ -57,9 +58,19 @@ def timeToMinutes(time):
     
     return totalMins
 
+def getHeaderHour(fileName):
+    '''
+    '''
+
+    HourLine = fileName[constants.NAME_HOUR_CHAR:-4]
+    
+    #hours = hourToInt(HourLine)
+    #minute = minutesToInt(HourLine)
+
+    #final = intToTime(hours,minute)
+    return HourLine
 
 
-
-
+#print(getHeaderHour("testSets_v2/testSets_v2/testSet1/doctors10h00.txt"))
 
 
