@@ -46,9 +46,11 @@ def updateSchedule(doctors, requests, previousSched, nextSched):
 		for item in requests:
 			for item2 in doctors:
 				if item[constants.MOTH_RISK_IDX] == "high" and int(item2[constants.DOCT_EXP_IDX]) >= 2:
-					#faz pop dos gajos que ja tao
-					exemplo.append((item, item2))
-				break
+					index_mothers = requests.index(item)
+					index_doctors = doctors.index(item2)
+					exemplo.append(doctors.pop(index_doctors))
+					exemplo.append(requests.pop(index_mothers))
+					
 		return exemplo
 					
 					
