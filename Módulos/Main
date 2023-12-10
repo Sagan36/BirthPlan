@@ -35,5 +35,24 @@ for line in sorted_Mothers:
             if int(line2[constants.DOCT_EXP_IDX]) >= 2:
                 Mother_Doctor = line[constants.MOTH_NAME_IDX], line2[constants.DOCT_NAME_IDX]
                 season_finale1.append(Mother_Doctor)
+#codigo que fiz sem querer e provalvemente vamos usar
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#nextSched = []
+		
+#HeaderHour = previousSched.pop(len(previousSched)-1) #we use len so its always the header hour
 
+#Hour = dateTime.hourToInt(HeaderHour)
+#Minute = dateTime.minutesToInt(HeaderHour)
 
+#for line in previousSched:               							#-----------------------------------
+	#if dateTime.hourToInt(line[constants.SCHE_HOUR_IDX]) < Hour:	#This analyzes the list and takes 
+		#idex_line = previousSched.index(line)						#out the birth that already happened
+		#previousSched.pop(idex_line)								#-----------------------------------
+		#if dateTime.minutesToInt(line[constants.SCHE_HOUR_IDX]) < Minute + 30:
+			#or line2 in doctors:
+				#if line[constants.SCHE_DOCTOR_IDX] == line2[constants.DOCT_NAME_IDX]:
+						#new_lastbirthday = dateTime.intToTime(dateTime.hourToInt(line2[constants.DOCT_LASTBIRTH_IDX]), dateTime.minutesToInt(line2[constants.DOCT_LASTBIRTH_IDX]) + 20)
+						#new_accumulator = int(line2[constants.DOCT_ACCUMULATOR_IDX]) + 20
+						#new_time = dateTime.intToTime(dateTime.hourToInt(line2[constants.DOCT_LASTREST_IDX]), dateTime.minutesToInt(line2[constants.DOCT_LASTREST_IDX]) + 20)
+						#nextSched.append([line2[constants.DOCT_NAME_IDX],line2[constants.DOCT_EXP_IDX], new_lastbirthday, new_accumulator, new_time])
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

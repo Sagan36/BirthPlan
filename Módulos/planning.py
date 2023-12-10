@@ -38,19 +38,31 @@ def updateSchedule(doctors, requests, previousSched, nextSched):
 
 		for line in previousSched:               							#-----------------------------------
 			if dateTime.hourToInt(line[constants.SCHE_HOUR_IDX]) < Hour:	#This analyzes the list and takes 
-				idex_line = previousSched.index(line)						#out the birth that already happened
+				idex_line = previousSched.index(line)						#out the births that already happened
 				previousSched.pop(idex_line)								#-----------------------------------
-			elif dateTime.minutesToInt(line[constants.SCHE_HOUR_IDX]) < Minute + 30:
-				for line2 in doctors:
-					if line[constants.SCHE_DOCTOR_IDX] == line2[constants.DOCT_NAME_IDX]:
-						new_lastbirthday = dateTime.intToTime(dateTime.hourToInt(line2[constants.DOCT_LASTBIRTH_IDX]), dateTime.minutesToInt(line2[constants.DOCT_LASTBIRTH_IDX]) + 20)
-						new_accumulator = int(line2[constants.DOCT_ACCUMULATOR_IDX]) + 20
-						new_time = dateTime.intToTime(dateTime.hourToInt(line2[constants.DOCT_LASTREST_IDX]), dateTime.minutesToInt(line2[constants.DOCT_LASTREST_IDX]) + 20)
-						nextSched.append([line2[constants.DOCT_NAME_IDX],line2[constants.DOCT_EXP_IDX], new_lastbirthday, new_accumulator, new_time])
-				
+		#return previousSched
+		#return requests
+		exemplo = []
+		for item in requests:
+			for item2 in doctors:
+				if item[constants.MOTH_RISK_IDX] == "high" and int(item2[constants.DOCT_EXP_IDX]) >= 2:
+					#faz pop dos gajos que ja tao
+					exemplo.append((item, item2))
+				break
+		return exemplo
 					
-		return nextSched
 					
+
+		
+		
+		
+		
+		#for line in :
+    		#if line[constants.MOTH_RISK_IDX] == "high":
+       			#for line2 in sorted_Doctors:
+            	#if int(line2[constants.DOCT_EXP_IDX]) >= 2:
+                	#Mother_Doctor = line[constants.MOTH_NAME_IDX], line2[constants.DOCT_NAME_IDX]
+                	#season_finale1.append(Mother_Doctor)
 		
 	
 
