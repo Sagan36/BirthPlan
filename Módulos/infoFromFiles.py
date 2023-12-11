@@ -94,14 +94,12 @@ def readScheduleFile(fileName): #tive que mudar isto pois eu so feio e tambem qu
 
     """
 
-    inFile = removeHeader(open(fileName,"r"))
-    HourLine = dateTime.getHeaderHour(fileName)       
+    inFile = removeHeader(open(fileName,"r"))     
     previousSched = [] 
     for line in inFile:
         if line.strip(): #Tipo isto ve se existe algum caraters na linha que esta a analisar e se existir faz o codigo abaixo se nao nao o faz, foi ao chat gpt pq a maneira que tinhas dito acho que n tava a funcionar mas tenta tu 
             scheduleData = line.rstrip().split(", ")# eu acho que este comando é inututil vai dar a mesma merda sem ele 
             previousSched.append(scheduleData)
-    previousSched.append(HourLine)
     return previousSched
 
 #print(readScheduleFile("testSets_v2/testSets_v2/testSet1/schedule10h00.txt"))
@@ -134,7 +132,7 @@ def sortDoctors(FileName):
 
 # print(readScheduleFile("./testSets_v2/testSets_v2/testSet1/schedule10h00.txt"))
 # print("\nSorted:")
-print(sortDoctors("./testSets_v2/testSets_v2/testSet1/doctors10h00.txt"))
+#print(sortDoctors("./testSets_v2/testSets_v2/testSet1/doctors10h00.txt"))
 # print()
 
 # print(sortMothers("./testSets_v2/testSets_v2/testSet1/requests10h30.txt"))

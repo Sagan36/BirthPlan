@@ -7,10 +7,11 @@
 import infoFromFiles
 import constants
 import dateTime
+import copy
 doctors = infoFromFiles.sortDoctors("testSets_v2/testSets_v2/testSet1/doctors10h00.txt")
 requests = infoFromFiles.sortMothers("testSets_v2/testSets_v2/testSet1/requests10h30.txt")
-previousSched = infoFromFiles.readScheduleFile("testSets_v2/testSets_v2/testSet2/schedule14h00.txt")
-
+previousSched = infoFromFiles.readScheduleFile("testSets_v2/testSets_v2/testSet1/schedule10h00.txt")
+HeaderHour = dateTime.getHeaderHour("testSets_v2/testSets_v2/testSet1/schedule10h00.txt")
 def updateSchedule(doctors, requests, previousSched, nextSched):
 		"""
 		Update birth assistance schedule assigning the given birth assistance requested
@@ -30,27 +31,27 @@ def updateSchedule(doctors, requests, previousSched, nextSched):
 		of the project (omitted here for the sake of readability).
 		"""
 		nextSched = []
+
+		Total_Minutes = dateTime.timeToMinutes(HeaderHour)
 		
-		HeaderHour = previousSched.pop(len(previousSched)-1) #we use len so its always the header hour
+		copy_PreviouShed = copy.deepcopy(previousSched)
+		copy_Doctors = copy.deepcopy(doctors)
+		copy_Requests = copy.deepcopy(requests)
 
-		Hour = dateTime.hourToInt(HeaderHour)
-		Minute = dateTime.minutesToInt(HeaderHour)
 
-		for line in previousSched:               							#-----------------------------------
-			if dateTime.hourToInt(line[constants.SCHE_HOUR_IDX]) <= Hour:	#This analyzes the list and takes 
-				idex_line = previousSched.index(line)						#out the births that already happened
-				previousSched.pop(idex_line)								#-----------------------------------
-		return previousSched
-		#return requests
+		for line in previousSched:               							           					#-------------------
+			if dateTime.timeToMinutes(line[constants.SCHE_HOUR_IDX]) <= Total_Minutes: 		 			#This analyzes the  |
+				copy_PreviouShed.remove(line)								    					 	#the list and takes |
+		if copy_PreviouShed != []:																		#the the birth that |
+			nextSched.append(copy_PreviouShed)															# will still happen |
+		#return nextSched #ainda está a dar tripla lista												#-------------------
 		exemplo = []
 		for item in requests:
-			index_mothers = requests.index(item)
 			for item2 in doctors:
-				index_doctors = doctors.index(item2)
 				if item[constants.MOTH_RISK_IDX] == "high" and int(item2[constants.DOCT_EXP_IDX]) >= 2:
-					exemplo.append(requests.pop(index_mothers))
-					exemplo.append(doctors.pop(index_doctors))
-		#return exemplo
+					exemplo.append(item)
+					exemplo.append(item2)
+		return exemplo
 					
 					
 
