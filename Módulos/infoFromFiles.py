@@ -17,6 +17,7 @@ def removeHeader(fileOpen):
     
     Requires: 
     fileOpen to be a file pointer of an existing .txt file.
+    The enconding used in opening is utf-8
     Ensures: 
     Returns the lines of the file excluding the first 7 lines
     that contains the header.
@@ -43,7 +44,7 @@ def readDoctorsFile(fileName):
     the file fileName (with all the info pieces belonging to that doctor),
     following the order provided in the lines of the file.
     """
-    inFile = removeHeader(open(fileName,"r")) 
+    inFile = removeHeader(open(fileName,"r", encoding = "utf-8")) 
     
     DoctorsList=[]
     for line in inFile:
@@ -68,7 +69,7 @@ def readRequestsFile(fileName):
     following the order provided in the lines of the file.
     """
 
-    inFile = removeHeader(open(fileName,"r"))       
+    inFile = removeHeader(open(fileName,"r", encoding = "utf-8"))       
 
     requestsList = [] 
     for line in inFile:
@@ -95,7 +96,8 @@ def readScheduleFile(fileName): #tive que mudar isto pois eu so feio e tambem qu
 
     """
 
-    inFile = removeHeader(open(fileName,"r"))     
+    inFile = removeHeader(open(fileName,"r"))
+    HourLine = dateTime.getHeaderHour(fileName)       
     previousSched = [] 
     for line in inFile:
         if line.strip(): #Tipo isto ve se existe algum caraters na linha que esta a analisar e se existir faz o codigo abaixo se nao nao o faz, foi ao chat gpt pq a maneira que tinhas dito acho que n tava a funcionar mas tenta tu 
@@ -141,17 +143,3 @@ def sortDoctors(FileName):
     sorted_Doctors.sort(key=lambda doctor: (dateTime.timeToMinutes(doctor[constants.DOCT_LASTBIRTH_IDX]), (-int(doctor[constants.DOCT_EXP_IDX])), doctor[constants.DOCT_ACCUMULATOR_IDX], doctor[constants.DOCT_LASTREST_IDX], doctor[constants.DOCT_NAME_IDX]))
 
     return sorted_Doctors
-
-#TESTES:
-#print(readDoctorsFile("testSets_v2/testSets_v2/testSet1/doctors10h00.txt"))
-# print()
-
-#print(readRequestsFile("./testSets_v2/testSets_v2/testSet2/requests14h30.txt"))
-# print()
-
-# print(readScheduleFile("./testSets_v2/testSets_v2/testSet1/schedule10h00.txt"))
-# print("\nSorted:")
-#print(sortDoctors("./testSets_v2/testSets_v2/testSet1/doctors10h00.txt"))
-# print()
-
-# print(sortMothers("./testSets_v2/testSets_v2/testSet1/requests10h30.txt"))
