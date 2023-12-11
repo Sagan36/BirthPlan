@@ -145,7 +145,7 @@ def sortDoctors(FileName):
     return sorted_Doctors
 
 #TESTES:
-#print(readDoctorsFile("./testSets_v2/testSets_v2/testSet2/doctors14h30.txt"))
+#print(readDoctorsFile("testSets_v2/testSets_v2/testSet1/doctors10h00.txt"))
 # print()
 
 #print(readRequestsFile("./testSets_v2/testSets_v2/testSet2/requests14h30.txt"))
@@ -153,7 +153,7 @@ def sortDoctors(FileName):
 
 # print(readScheduleFile("./testSets_v2/testSets_v2/testSet1/schedule10h00.txt"))
 # print("\nSorted:")
-# print(sortDoctors("./testSets_v2/testSets_v2/testSet1/doctors10h30.txt"))
+print(sortDoctors("./testSets_v2/testSets_v2/testSet1/doctors10h00.txt"))
 # print()
 
 # print(sortMothers("./testSets_v2/testSets_v2/testSet1/requests10h30.txt"))
