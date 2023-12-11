@@ -9,7 +9,7 @@ import constants
 import dateTime
 doctors = infoFromFiles.sortDoctors("testSets_v2/testSets_v2/testSet1/doctors10h00.txt")
 requests = infoFromFiles.sortMothers("testSets_v2/testSets_v2/testSet1/requests10h30.txt")
-previousSched = infoFromFiles.readScheduleFile("testSets_v2/testSets_v2/testSet1/schedule10h00.txt")
+previousSched = infoFromFiles.readScheduleFile("testSets_v2/testSets_v2/testSet2/schedule14h00.txt")
 
 def updateSchedule(doctors, requests, previousSched, nextSched):
 		"""
@@ -37,21 +37,20 @@ def updateSchedule(doctors, requests, previousSched, nextSched):
 		Minute = dateTime.minutesToInt(HeaderHour)
 
 		for line in previousSched:               							#-----------------------------------
-			if dateTime.hourToInt(line[constants.SCHE_HOUR_IDX]) < Hour:	#This analyzes the list and takes 
+			if dateTime.hourToInt(line[constants.SCHE_HOUR_IDX]) <= Hour:	#This analyzes the list and takes 
 				idex_line = previousSched.index(line)						#out the births that already happened
 				previousSched.pop(idex_line)								#-----------------------------------
-		#return previousSched
+		return previousSched
 		#return requests
 		exemplo = []
 		for item in requests:
+			index_mothers = requests.index(item)
 			for item2 in doctors:
+				index_doctors = doctors.index(item2)
 				if item[constants.MOTH_RISK_IDX] == "high" and int(item2[constants.DOCT_EXP_IDX]) >= 2:
-					index_mothers = requests.index(item)
-					index_doctors = doctors.index(item2)
-					exemplo.append(doctors.pop(index_doctors))
 					exemplo.append(requests.pop(index_mothers))
-					
-		return exemplo
+					exemplo.append(doctors.pop(index_doctors))
+		#return exemplo
 					
 					
 
