@@ -7,7 +7,6 @@
 
 import constants
 import dateTime
-import infoFromFiles as iF #PARA TESTAR, RETIRAR DPS!!
 
 
 
@@ -16,11 +15,10 @@ def updateHeader(fileName):
     Updates the hours of last modified hour in header of file.
 
     Requires:
-    fileName is the name of a  non-empty .txt file.
+    fileName is the name of a non-empty .txt file.
     Ensures:
     Adds 30 minutes to the hours in the header of the file and returns
-    it in a str 
-    Returns the calculated new hour in str.
+    it as a str 
     """
     fp = open(fileName,"r")
     fileList = fp.readlines()
@@ -51,6 +49,13 @@ def updateHeader(fileName):
 
 def updatedName(fileName):
     """
+    Updates the hours to last modified hour in name of file.
+
+    Requires:
+    fileName is the name of a .txt file with a hour in the format HHhMM.
+    Ensures:
+    Adds 30 minutes to the hours in the name of the file and returns
+    it as a str 
     """
     fp = open(fileName,"r")
     linesList = fp.readlines()
@@ -71,12 +76,6 @@ def updatedName(fileName):
 
     return newName
 
-
-#print(updatedName("./testSets_v2/testSets_v2/testSet3/doctors16h00.txt"))
-
-# print(iF.readDoctorsFile("./testSets_v2/testSets_v2/testSet3/doctors16h00.txt"))
-# print(iF.readRequestsFile("./testSets_v2/testSets_v2/testSet2/requests14h30.txt"))
-# print(iF.readScheduleFile("./testSets_v2/testSets_v2/testSet2/schedule14h30.txt"))
 
 
 def writeScheduleFile(sched, header, fileName):
@@ -117,7 +116,19 @@ def writeScheduleFile(sched, header, fileName):
 def writeDoctorsFile(doctors, header, fileName):
     """
     Writes a collection of informations of doctors into a file.
-    #Escrever o resto com o planning feito
+
+    Requires:
+    doctors is a list with the structure as in the output of
+    planning.updateDoctors representing the doctor's updated hours;
+    header is a string with a header, as in the examples provided in 
+    the general specification (omitted here for the sake of readability);
+    fileName is a str with the name of a .txt file.
+    Ensures:
+    writing of file named fileName representing the informations of every available doctor,
+    one per line, as organized in the examples provided
+    in the general specification (omitted here for the sake of readability); 
+    the lines in this file keeps the ordering top to bottom of 
+    the statistics as ordered head to tail in doctors.
     """
     docStr=str()
     for i in doctors:
@@ -134,19 +145,3 @@ def writeDoctorsFile(doctors, header, fileName):
     fp.writelines(allLines)
 
     fp.close()
-
-
-#Testes
-#print(updateHourHeader(open("./testSets_v2/testSets_v2/testSet1/doctors10h00.txt","r")))
-#fp = open("teste.txt","w")
-# fp.writelines(updateHourHeader(open("./testSets_v2/testSets_v2/testSet1/doctors10h00.txt","r")))
-# fp.close()
-
-#
-# x = updateHeader("./testSets_v2/testSets_v2/testSet2/schedule14h00.txt")
-#writeScheduleFile([['14h30', 'GraÃ§a GonÃ§alves', 'HorÃ¡cio Horta'], ['14h30', 'HortÃªnsia Holmes', 'JosÃ© Justo'],\
-                #['14h30', 'Irene IlÃ\xaddio', 'Guilherme Gaspar'], ['14h30', 'Joana Joanes', 'Ildefonso InÃ¡cio']],x,"teste.txt")
-
-#x = updateHeader("./testSets_v2/testSets_v2/testSet2/doctors14h00.txt")
-#writeScheduleFile([['Manuel Machado', '3', '16h30', '120', '39h40'], ['Orlando Oliveira', '3', '16h40', '80', '39h20']],x,"teste.txt")
-    
