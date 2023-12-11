@@ -18,7 +18,8 @@ def removeHeader(fileOpen):
     Requires: 
     fileOpen to be a file pointer of an existing .txt file.
     Ensures: 
-    Removes the header lines from the file, which corresponds to the first NUM_HEADER_LINES.
+    Returns the lines of the file excluding the first 7 lines
+    that contains the header.
     '''
 
     allLines = fileOpen.readlines()
@@ -88,7 +89,7 @@ def readScheduleFile(fileName): #tive que mudar isto pois eu so feio e tambem qu
     a list of previous schedule organized as in the examples provided in
     the general specification (omitted here for the sake of readability).
     Ensures:
-    list of lists where each list corresponds to a scheduled parturition listed in
+    Returns list of lists where each list corresponds to a scheduled parturition listed in
     the file fileName (with all the info pieces belonging to that parturition),
     following the order provided in the lines of the file.
 
@@ -106,9 +107,16 @@ def readScheduleFile(fileName): #tive que mudar isto pois eu so feio e tambem qu
 
 #print(readScheduleFile("testSets_v2/testSets_v2/testSet1/schedule10h00.txt"))
 
-def sortMothers(FileName):
+def sortMothers(FileName): #Se calhar metemos isto a receber logo o sortedMoms?
     '''
-    Organizes the 
+    Sorts list of requests by service priority.
+
+    Requires:
+    FileName is the name of a non-empty .txt file of the pending requests
+    organized as in the examples provided in the general specification 
+    (omitted here for the sake of readability).
+    Ensures:
+    Returns list of requests sorted by Risk -> Urgency -> Age -> Name
     '''
     sortedMoms = readRequestsFile(FileName)
     Color_Order = {"red":1, "yellow":2, "green":3}
@@ -117,8 +125,19 @@ def sortMothers(FileName):
                                         (-int(mother[constants.MOTH_AGE_IDX])), mother[constants.MOTH_NAME_IDX]))           
     return sortedMoms
     #-int é para fazer decresecnte
+
+
+
 def sortDoctors(FileName):
     '''
+    Sorts list of doctors by service availability.
+
+    Requires:
+    FileName is the name of a non-empty .txt file of the available doctors
+    organized as in the examples provided in the general specification 
+    (omitted here for the sake of readability).
+    Ensures:
+    Returns list of doctors sorted by First- -> Experience -> Time-to-Break -> Name
     '''
     sorted_Doctors = readDoctorsFile(FileName)
     sorted_Doctors.sort(key=lambda doctor: (dateTime.timeToMinutes(doctor[constants.DOCT_LASTBIRTH_IDX]), (-int(doctor[constants.DOCT_EXP_IDX])), doctor[constants.DOCT_ACCUMULATOR_IDX], doctor[constants.DOCT_LASTREST_IDX], doctor[constants.DOCT_NAME_IDX]))
