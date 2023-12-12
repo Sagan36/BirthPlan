@@ -160,7 +160,7 @@ def UpdateDoctors(doctors, nextSched):
 	
 	
 	
-print(UpdateDoctors(doctors, updateSchedule(doctors, requests, previousSched, [])))
+#print(UpdateDoctors(doctors, updateSchedule(doctors, requests, previousSched, [])))
 	
 	#for line in requests:
        # if line[constants.MOTH_RISK_IDX] == "high":
