@@ -3,7 +3,7 @@
 # 2023-2024 Programação 1 (LTI)
 # Grupo 160
 # 62214 Luís Lima
-# 75001 Maria Marisa
+# 62269 Dinis Garcia
 
 import constants
 def hourToInt(time):
@@ -80,4 +80,18 @@ def getHeaderHour(fileName):
 
 #print(getHeaderHour("testSets_v2/testSets_v2/testSet1/doctors10h00.txt"))
 
+def add30Minutes(lastHour):
+    """
+    """
+    minutes = minutesToInt(lastHour)
+    hours = hourToInt(lastHour)
 
+    if minutes == 30:
+        hours += 1
+        minutes = 0
+        newHour = intToTime(hours,minutes)
+    else:
+        minutes += 30
+        newHour = intToTime(hours,minutes)
+        
+    return newHour

@@ -107,7 +107,7 @@ def readScheduleFile(fileName): #tive que mudar isto pois eu so feio e tambem qu
 
 #print(readScheduleFile("testSets_v2/testSets_v2/testSet1/schedule10h00.txt"))
 
-def sortMothers(FileName): #Se calhar metemos isto a receber logo o sortedMoms?
+def sortMothers(sortedMoms): #Se calhar metemos isto a receber logo o sortedMoms?
     '''
     Sorts list of requests by service priority.
 
@@ -118,7 +118,6 @@ def sortMothers(FileName): #Se calhar metemos isto a receber logo o sortedMoms?
     Ensures:
     Returns list of requests sorted by Risk -> Urgency -> Age -> Name
     '''
-    sortedMoms = readRequestsFile(FileName)
     Color_Order = {"red":1, "yellow":2, "green":3}
     Risk_Order = {"high":1, "medium":2, "low":3}
     sortedMoms.sort(key=lambda mother: (Risk_Order[mother[constants.MOTH_RISK_IDX]], Color_Order[mother[constants.MOTH_COLOR_IDX]], \
@@ -128,7 +127,7 @@ def sortMothers(FileName): #Se calhar metemos isto a receber logo o sortedMoms?
 
 
 
-def sortDoctors(FileName):
+def sortDoctors(sorted_Doctors): #UPdate contrato
     '''
     Sorts list of doctors by service availability.
 
@@ -139,7 +138,6 @@ def sortDoctors(FileName):
     Ensures:
     Returns list of doctors sorted by First- -> Experience -> Time-to-Break -> Name
     '''
-    sorted_Doctors = readDoctorsFile(FileName)
     sorted_Doctors.sort(key=lambda doctor: (dateTime.timeToMinutes(doctor[constants.DOCT_LASTBIRTH_IDX]), (-int(doctor[constants.DOCT_EXP_IDX])), doctor[constants.DOCT_ACCUMULATOR_IDX], doctor[constants.DOCT_LASTREST_IDX], doctor[constants.DOCT_NAME_IDX]))
 
     return sorted_Doctors

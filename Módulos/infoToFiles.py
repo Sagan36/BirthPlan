@@ -25,16 +25,8 @@ def updateHeader(fileName):
     header = fileList[:constants.NUM_HEADER_LINES]
 
     lastHour = header[constants.HOUR_LINE_IDX]
-    minutes = dateTime.minutesToInt(lastHour)
-    hours = dateTime.hourToInt(lastHour)
 
-    if minutes == 30:
-        hours += 1
-        minutes = 0
-        newHour = dateTime.intToTime(hours,minutes)
-    else:
-        minutes += 30
-        newHour = dateTime.intToTime(hours,minutes)
+    newHour = dateTime.add30Minutes(lastHour)
 
     header[constants.HOUR_LINE_IDX] = newHour + "\n"
 
@@ -61,16 +53,8 @@ def updatedName(fileName):
     linesList = fp.readlines()
 
     lastHour = linesList[constants.HOUR_LINE_IDX]
-    minutes = dateTime.minutesToInt(lastHour)
-    hours = dateTime.hourToInt(lastHour)
-
-    if minutes == 30:
-        hours += 1
-        minutes = 0
-        newHour = dateTime.intToTime(hours,minutes)
-    else:
-        minutes += 30
-        newHour = dateTime.intToTime(hours,minutes)
+    
+    newHour = dateTime.add30Minutes(lastHour)
 
     newName = fileName[:constants.NAME_HOUR_CHAR] + newHour + ".txt"
 
@@ -106,7 +90,7 @@ def writeScheduleFile(sched, header, fileName):
         schedStr += "\n"
 
     allLines = header + schedStr
-    fp = open(fileName,"w")
+    fp = open(fileName,"w", encoding = "utf-8")
     fp.writelines(allLines)
 
     fp.close()
@@ -141,7 +125,7 @@ def writeDoctorsFile(doctors, header, fileName):
         docStr += "\n"
 
     allLines = header + docStr
-    fp = open(fileName,"w")
+    fp = open(fileName,"w", encoding = "utf-8")
     fp.writelines(allLines)
 
     fp.close()

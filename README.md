@@ -13,8 +13,8 @@ Projeto Final do curso de Programação I
 
 ### Perguntar ao Stor
 
- - Pq é que no testset2 fica 14:30h!?!?!?
- - Quando os doutores não trabalham, é adicionada á msm os minutos até intrevalo?
+ - Pq é que no testset2 fica 14:30h!?!?!? #O stor vai lançar outro testset :D 
+ - Quando os doutores não trabalham, é adicionada á msm os minutos até intrevalo? #NAO
  - TestSet1 Bernardo está disponivel as 10h10 e está a fazer uma consulta às 10h10
 
 ### Erros Conhecidos:
