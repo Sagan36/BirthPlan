@@ -114,7 +114,7 @@ def updateSchedule(doctors, requests, previousSched, nextTime):
 		else:
 			#Adicionar 20 minutos ao tempo da ultima consulta do chosen_doctor e reorganizar a lista dos doutores
 			add20Minutes(chosen_doctor)
-			doctors.sort(key=lambda doctor: (dateTime.timeToMinutes(doctor[constants.DOCT_LASTBIRTH_IDX]), (-int(doctor[constants.DOCT_EXP_IDX])), doctor[constants.DOCT_ACCUMULATOR_IDX], doctor[constants.DOCT_LASTREST_IDX], doctor[constants.DOCT_NAME_IDX]))
+			infoFromFiles.sortDoctors(doctors)
 
 		#Remover o pedido pendente da mãe
 		requests.remove(next_mother)
@@ -125,11 +125,11 @@ def updateSchedule(doctors, requests, previousSched, nextTime):
 	nextSched.sort(key=lambda x: dateTime.timeToMinutes(x[0]))
 	return nextSched
 
-doctors = infoFromFiles.sortDoctors("testSets_v2/testSets_v2/testSet1/doctors10h00.txt")
-requests = infoFromFiles.sortMothers("testSets_v2/testSets_v2/testSet1/requests10h30.txt")
-previousSched = infoFromFiles.readScheduleFile("testSets_v2/testSets_v2/testSet1/schedule10h00.txt")
-nextHour = dateTime.getHeaderHour("testSets_v2/testSets_v2/testSet1/requests10h30.txt")
-print(updateSchedule(doctors, requests, previousSched, nextHour))
+# doctors = infoFromFiles.sortDoctors("testSets_v2/testSets_v2/testSet1/doctors10h00.txt")
+# requests = infoFromFiles.sortMothers("testSets_v2/testSets_v2/testSet1/requests10h30.txt")
+# previousSched = infoFromFiles.readScheduleFile("testSets_v2/testSets_v2/testSet1/schedule10h00.txt")
+# nextHour = dateTime.getHeaderHour("testSets_v2/testSets_v2/testSet1/requests10h30.txt")
+#print(updateSchedule(doctors, requests, previousSched, nextHour))
 		
 		
 		

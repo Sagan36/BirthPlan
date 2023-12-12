@@ -90,7 +90,7 @@ def writeScheduleFile(sched, header, fileName):
         schedStr += "\n"
 
     allLines = header + schedStr
-    fp = open(fileName,"w")
+    fp = open(fileName,"w", encoding = "utf-8")
     fp.writelines(allLines)
 
     fp.close()
@@ -125,7 +125,7 @@ def writeDoctorsFile(doctors, header, fileName):
         docStr += "\n"
 
     allLines = header + docStr
-    fp = open(fileName,"w")
+    fp = open(fileName,"w", encoding = "utf-8")
     fp.writelines(allLines)
 
     fp.close()
