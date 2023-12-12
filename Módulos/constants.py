@@ -14,7 +14,7 @@
 
 
 # Value for weekly pause in the output schedule
-WKL_PAUSE = "weekly leave"
+WKL_LEAVE = "weekly leave"
 
 
 

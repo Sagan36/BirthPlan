@@ -56,3 +56,78 @@ for line in sorted_Mothers:
 						#new_time = dateTime.intToTime(dateTime.hourToInt(line2[constants.DOCT_LASTREST_IDX]), dateTime.minutesToInt(line2[constants.DOCT_LASTREST_IDX]) + 20)
 						#nextSched.append([line2[constants.DOCT_NAME_IDX],line2[constants.DOCT_EXP_IDX], new_lastbirthday, new_accumulator, new_time])
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+doctors = infoFromFiles.sortDoctors("testSets_v2/testSets_v2/testSet1/doctors10h00.txt")
+mothers = infoFromFiles.sortMothers("testSets_v2/testSets_v2/testSet1/requests10h30.txt")
+previousSched = infoFromFiles.readScheduleFile("testSets_v2/testSets_v2/testSet1/schedule10h00.txt")
+requestHour = dateTime.getHeaderHour("testSets_v2/testSets_v2/testSet1/requests10h30.txt")
+sched = []
+
+def add20Minutes(doctor):
+    """
+    """
+    lastAssis = doctor[2]
+    dayBreak = int(doctor[3])
+    weekBreak = doctor[4]
+
+    #Adicionar 20 minutos ás horas do último parto mais 1 hora em caso de descanso
+    minutes = dateTime.timeToMinutes(lastAssis)
+    minutes += 20
+    dayBreak += 20
+    if dayBreak >= 240:
+        minutes += 60
+        dayBreak = 0
+    doctor[3] = str(dayBreak)
+    doctor[2] = dateTime.minutesToTime(minutes)
+
+    #Adicionar 20 minutos ás horas do último descanso
+    minutes = dateTime.timeToMinutes(weekBreak)
+    minutes += 20
+    if minutes >= 2400:
+        doctor[4] = constants.WKL_LEAVE
+        doctors.remove(doctor)
+    else:
+        doctor[4] = dateTime.minutesToTime(minutes)
+
+    return doctor
+
+
+#Os doutores esperam até aos pedidos das mães
+for doctor in doctors:
+    if dateTime.timeToMinutes(doctor[2]) < dateTime.timeToMinutes(requestHour):
+        doctor[2] = requestHour
+
+
+
+while len(mothers) != 0:
+    stillNeeds = True
+    next_mother = mothers[0]
+    for doctor in doctors:
+        if stillNeeds:
+            if next_mother[3] == "high":
+                if doctor[1] == "3" or doctor[1] == "2":
+                    temp = [doctor[2],next_mother[0],doctor[0]]
+                    sched.append(temp)
+                    chosen_doctor = doctor
+                    stillNeeds = False
+            else:
+                temp = [doctor[2],next_mother[0],doctor[0]]
+                sched.append(temp)
+                chosen_doctor = doctor
+                stillNeeds = False
+    
+    if len(doctors) == 0:
+        temp = [requestHour,next_mother[0],"redirected to other network"]
+        sched.append(temp)
+    else:
+        add20Minutes(chosen_doctor)
+    mothers.remove(next_mother)
+    
+
+    doctors.sort(key=lambda doctor: (dateTime.timeToMinutes(doctor[constants.DOCT_LASTBIRTH_IDX]), (-int(doctor[constants.DOCT_EXP_IDX])), doctor[constants.DOCT_ACCUMULATOR_IDX], doctor[constants.DOCT_LASTREST_IDX], doctor[constants.DOCT_NAME_IDX]))
+
+print(sched)
+

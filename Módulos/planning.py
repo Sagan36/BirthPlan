@@ -8,54 +8,131 @@ import infoFromFiles
 import constants
 import dateTime
 import copy
-doctors = infoFromFiles.sortDoctors("testSets_v2/testSets_v2/testSet1/doctors10h00.txt")
-requests = infoFromFiles.sortMothers("testSets_v2/testSets_v2/testSet1/requests10h30.txt")
-previousSched = infoFromFiles.readScheduleFile("testSets_v2/testSets_v2/testSet1/schedule10h00.txt")
-HeaderHour = dateTime.getHeaderHour("testSets_v2/testSets_v2/testSet1/schedule10h00.txt")
+doctors = infoFromFiles.sortDoctors("testSets_v2/testSets_v2/testSet3/doctors16h00.txt")
+requests = infoFromFiles.sortMothers("testSets_v2/testSets_v2/testSet3/requests16h30.txt")
+previousSched = infoFromFiles.readScheduleFile("testSets_v2/testSets_v2/testSet3/schedule16h00.txt")
+HeaderHour = dateTime.getHeaderHour("testSets_v2/testSets_v2/testSet3/schedule16h00.txt")
+# print(doctors, requests, previousSched, HeaderHour)
+
+
+def add20Minutes(doctor):
+    """
+    """
+    lastAssis = doctor[2]
+    dayBreak = int(doctor[3])
+    weekBreak = doctor[4]
+
+    #Adicionar 20 minutos ás horas do último parto mais 1 hora em caso de descanso
+    minutes = dateTime.timeToMinutes(lastAssis)
+    minutes += 20
+    dayBreak += 20
+    if dayBreak >= 240:
+        minutes += 60
+        dayBreak = 0
+    doctor[3] = str(dayBreak)
+    doctor[2] = dateTime.minutesToTime(minutes)
+
+    #Adicionar 20 minutos ás horas do último descanso
+    minutes = dateTime.timeToMinutes(weekBreak)
+    minutes += 20
+    if minutes >= 2400:
+        doctor[4] = constants.WKL_LEAVE
+        doctors.remove(doctor)
+    else:
+        doctor[4] = dateTime.minutesToTime(minutes)
+
+    return doctor
+
+
+
 def updateSchedule(doctors, requests, previousSched, nextSched):
-		"""
-		Update birth assistance schedule assigning the given birth assistance requested
-		to the given doctors, taking into account a previous schedule.
+	"""
+	Update birth assistance schedule assigning the given birth assistance requested
+	to the given doctors, taking into account a previous schedule.
+	
+	Requires:
+	doctors is a list of lists with the structure as in the output of
+	infoFromFiles.readDoctorsFile concerning the time of the previous schedule;
+	requests is a list of lists with the structure as in the output of 
+	infoFromFile.readRequestsFile concerning the current update time;
+	previousSched is a list of lists with the structure as in the output of
+	infoFromFiles.readScheduleFile concerning the previous update time;
+	Ensures:
+	a list of birth assistances, representing the schedule updated at
+	the current update time (= previous update time + 30 minutes),
+	assigned according to the conditions indicated in the general specification 
+	of the project (omitted here for the sake of readability).
+	"""
+	nextSched = []
+	sched = []
+
+	Total_Minutes = dateTime.timeToMinutes(HeaderHour)
+	
+	copy_PreviouShed = copy.deepcopy(previousSched)
+	copy_Doctors = copy.deepcopy(doctors)
+	copy_Requests = copy.deepcopy(requests)
+
+	#mais 30???
+	for line in previousSched:               							           					#-----------------------
+		if dateTime.timeToMinutes(line[constants.SCHE_HOUR_IDX]) <= Total_Minutes + 30: 			#This analyzes the     |
+			copy_PreviouShed.remove(line)								    					 	#the list and takes    |
+	if copy_PreviouShed != []:																		#out the the birth     |
+		nextSched = copy_PreviouShed														        #that already happened |
+	#return nextSched #ainda está a dar tripla lista												#-----------------------
+
+	
+	
+	#Os doutores esperam até aos pedidos das mães
+	for doctor in doctors:
+		if dateTime.timeToMinutes(doctor[2]) < dateTime.timeToMinutes(requestHour):
+			doctor[2] = requestHour
+				
+	
+	#Enquanto há mães à espera
+	while len(requests) != 0:
+		#Determina se a mãe ainda precisa de assistência
+		needsAssis = True
+		next_mother = requests[0]
+		#Procurar doutores para next_mother
+		for doctor in doctors:
+			if needsAssis:
+				#Partos de risco
+				if next_mother[3] == "high":
+					if doctor[1] == "3" or doctor[1] == "2":
+						sched.append([doctor[2],next_mother[0],doctor[0]])
+						#Doutor que ficou de assistir a mãe
+						chosen_doctor = doctor
+						#Já não é preciso assistência para esta mãe
+						needsAssis = False
+				else:
+					sched.append([doctor[2],next_mother[0],doctor[0]])
+					#Doutor que ficou de assistir a mãe
+					chosen_doctor = doctor
+					#Já não é preciso assistência para esta mãe
+					needsAssis = False
 		
-		Requires:
-		doctors is a list of lists with the structure as in the output of
-		infoFromFiles.readDoctorsFile concerning the time of the previous schedule;
-		requests is a list of lists with the structure as in the output of 
-		infoFromFile.readRequestsFile concerning the current update time;
-		previousSched is a list of lists with the structure as in the output of
-		infoFromFiles.readScheduleFile concerning the previous update time;
-		Ensures:
-		a list of birth assistances, representing the schedule updated at
-		the current update time (= previous update time + 30 minutes),
-		assigned according to the conditions indicated in the general specification 
-		of the project (omitted here for the sake of readability).
-		"""
-		nextSched = []
+		#Se não houver doutores
+		if len(doctors) == 0:
+			#as mães têm de ser mandadas para outra rede de hospitais
+			temp = [requestHour,next_mother[0],"redirected to other network"]
+			sched.append(temp)
+		else:
+			#Adicionar 20 minutos ao tempo da ultima consulta do chosen_doctor e reorganizar a lista dos doutores
+			add20Minutes(chosen_doctor)
+			doctors.sort(key=lambda doctor: (dateTime.timeToMinutes(doctor[constants.DOCT_LASTBIRTH_IDX]), (-int(doctor[constants.DOCT_EXP_IDX])), doctor[constants.DOCT_ACCUMULATOR_IDX], doctor[constants.DOCT_LASTREST_IDX], doctor[constants.DOCT_NAME_IDX]))
 
-		Total_Minutes = dateTime.timeToMinutes(HeaderHour)
+		#Remover o pedido pendente da mãe
+		requests.remove(next_mother)
 		
-		copy_PreviouShed = copy.deepcopy(previousSched)
-		copy_Doctors = copy.deepcopy(doctors)
-		copy_Requests = copy.deepcopy(requests)
+
+	#Retornar o schedule com o antigo + novo, organizado por tempo de atendimento
+	nextSched = nextSched + sched
+	nextSched.sort(key=lambda x: dateTime.timeToMinutes(x[0]))
+	return nextSched
 
 
-		for line in previousSched:               							           					#-------------------
-			if dateTime.timeToMinutes(line[constants.SCHE_HOUR_IDX]) <= Total_Minutes: 		 			#This analyzes the  |
-				copy_PreviouShed.remove(line)								    					 	#the list and takes |
-		if copy_PreviouShed != []:																		#the the birth that |
-			nextSched.append(copy_PreviouShed)															# will still happen |
-		#return nextSched #ainda está a dar tripla lista												#-------------------
-		exemplo = []
-		for item in requests:
-			for item2 in doctors:
-				if item[constants.MOTH_RISK_IDX] == "high" and int(item2[constants.DOCT_EXP_IDX]) >= 2:
-					exemplo.append(item)
-					exemplo.append(item2)
-		return exemplo
-					
-					
-
-		
+requestHour = dateTime.getHeaderHour("testSets_v2/testSets_v2/testSet3/requests16h30.txt")
+print(updateSchedule(doctors, requests, previousSched, []))
 		
 		
 		
@@ -68,7 +145,7 @@ def updateSchedule(doctors, requests, previousSched, nextSched):
 		
 	
 
-print(updateSchedule(doctors, requests, previousSched, "vski"))	
+#print(updateSchedule(doctors, requests, previousSched, "vski"))	
         
         
 	

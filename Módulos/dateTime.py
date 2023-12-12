@@ -50,13 +50,20 @@ def timeToMinutes(time):
     """
     """
     if time == "weekly leave":
-        totalMins = 9999
+        totalMins = 9999 #pass?
     else:
         hours = hourToInt(time)
-        minutes =minutesToInt(time)
+        minutes = minutesToInt(time)
         totalMins = minutes + (hours * 60)
     
     return totalMins
+
+def minutesToTime(minutes):
+    hours = minutes // 60
+    minutes -= hours*60
+    return intToTime(hours, minutes)
+
+
 
 def getHeaderHour(fileName):
     '''
