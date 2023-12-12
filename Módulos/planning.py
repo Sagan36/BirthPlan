@@ -105,8 +105,7 @@ def updateSchedule(doctors, requests, previousSched, nextTime):
 					#Doutor que ficou de assistir a mãe
 					chosen_doctor = doctor
 					#Já não é preciso assistência para esta mãe
-					needsAssis = False
-		
+					needsAssis = False		
 		#Se não houver doutores
 		if len(doctors) == 0:
 			#as mães têm de ser mandadas para outra rede de hospitais
@@ -126,11 +125,11 @@ def updateSchedule(doctors, requests, previousSched, nextTime):
 	nextSched.sort(key=lambda x: dateTime.timeToMinutes(x[0]))
 	return nextSched
 
-doctors = infoFromFiles.sortDoctors(infoFromFiles.readDoctorsFile("testSets_v2/testSets_v2/testSet1/doctors10h00.txt"))
-requests = infoFromFiles.sortMothers(infoFromFiles.readRequestsFile("testSets_v2/testSets_v2/testSet1/requests10h30.txt"))
-previousSched = infoFromFiles.readScheduleFile("testSets_v2/testSets_v2/testSet1/schedule10h00.txt")
-nextHour = dateTime.getHeaderHour("testSets_v2/testSets_v2/testSet1/requests10h30.txt")
-print(updateSchedule(doctors, requests, previousSched, nextHour))
+# doctors = infoFromFiles.sortDoctors(infoFromFiles.readDoctorsFile("testSets_v2/testSets_v2/testSet1/doctors10h00.txt"))
+# requests = infoFromFiles.sortMothers(infoFromFiles.readRequestsFile("testSets_v2/testSets_v2/testSet1/requests10h30.txt"))
+# previousSched = infoFromFiles.readScheduleFile("testSets_v2/testSets_v2/testSet1/schedule10h00.txt")
+# nextHour = dateTime.getHeaderHour("testSets_v2/testSets_v2/testSet1/requests10h30.txt")
+# print(updateSchedule(doctors, requests, previousSched, nextHour))
 		
 		
 		
@@ -145,19 +144,30 @@ print(updateSchedule(doctors, requests, previousSched, nextHour))
 
 #print(updateSchedule(doctors, requests, previousSched, "vski"))	
         
-        
+def UpdateDoctors(doctors, nextSched):
+	'''
+	'''
+	EpicDoctors = []
+	while nextSched == len(nextSched):
+		for scheduled in nextSched:
+			for doctor in doctors:
+				if scheduled[2] == doctor[constants.DOCT_NAME_IDX]:
+					nextSched.remove(scheduled)
+					plus_20_doctors = add20Minutes(doctor)
+					EpicDoctors.append(plus_20_doctors)		
+	return EpicDoctors
+
 	
 	
 	
-	
-	
+print(UpdateDoctors(doctors, updateSchedule(doctors, requests, previousSched, [])))
 	
 	#for line in requests:
        # if line[constants.MOTH_RISK_IDX] == "high":
             #for line2 in doctors:
                 #if line2[constants.DOCT_EXP_IDX]:
                     #both = line[constants.MOTH_NAME_IDX], line2[constants.DOCT_NAME_IDX]
-                    #nextSched.append(both)
+                    #nextSched.append(both)de
 	
 	
     
