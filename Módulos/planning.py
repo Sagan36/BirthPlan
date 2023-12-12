@@ -8,19 +8,16 @@ import infoFromFiles
 import constants
 import dateTime
 import copy
-doctors = infoFromFiles.sortDoctors("testSets_v2/testSets_v2/testSet3/doctors16h00.txt")
-requests = infoFromFiles.sortMothers("testSets_v2/testSets_v2/testSet3/requests16h30.txt")
-previousSched = infoFromFiles.readScheduleFile("testSets_v2/testSets_v2/testSet3/schedule16h00.txt")
-HeaderHour = dateTime.getHeaderHour("testSets_v2/testSets_v2/testSet3/schedule16h00.txt")
+
 # print(doctors, requests, previousSched, HeaderHour)
 
 
 def add20Minutes(doctor):
     """
     """
-    lastAssis = doctor[2]
-    dayBreak = int(doctor[3])
-    weekBreak = doctor[4]
+    lastAssis = doctor[2] #Hora da última assitência
+    dayBreak = int(doctor[3]) #Tempo de trabalho diário
+    weekBreak = doctor[4] #Tempo de trabalho semanal
 
     #Adicionar 20 minutos ás horas do último parto mais 1 hora em caso de descanso
     minutes = dateTime.timeToMinutes(lastAssis)
@@ -45,47 +42,45 @@ def add20Minutes(doctor):
 
 
 
-def updateSchedule(doctors, requests, previousSched, nextSched):
+def updateSchedule(doctors, requests, previousSched, nextTime):
 	"""
 	Update birth assistance schedule assigning the given birth assistance requested
-	to the given doctors, taking into account a previous schedule.
+    to the given doctors, taking into account a previous schedule.
 	
 	Requires:
 	doctors is a list of lists with the structure as in the output of
-	infoFromFiles.readDoctorsFile concerning the time of the previous schedule;
+	infoFromFiles.readDoctorsFile concerning the time of previous schedule;
 	requests is a list of lists with the structure as in the output of 
 	infoFromFile.readRequestsFile concerning the current update time;
 	previousSched is a list of lists with the structure as in the output of
 	infoFromFiles.readScheduleFile concerning the previous update time;
+	nextTime is a string in the format HHhMM with the time of the next schedule
 	Ensures:
 	a list of birth assistances, representing the schedule updated at
 	the current update time (= previous update time + 30 minutes),
-	assigned according to the conditions indicated in the general specification 
+	assigned according to the conditions indicated in the general specification
 	of the project (omitted here for the sake of readability).
 	"""
-	nextSched = []
 	sched = []
 
-	Total_Minutes = dateTime.timeToMinutes(HeaderHour)
+	Total_Minutes = dateTime.timeToMinutes(nextTime)
 	
 	copy_PreviouShed = copy.deepcopy(previousSched)
 	copy_Doctors = copy.deepcopy(doctors)
 	copy_Requests = copy.deepcopy(requests)
 
-	#mais 30???
 	for line in previousSched:               							           					#-----------------------
-		if dateTime.timeToMinutes(line[constants.SCHE_HOUR_IDX]) <= Total_Minutes + 30: 			#This analyzes the     |
+		if dateTime.timeToMinutes(line[constants.SCHE_HOUR_IDX]) <= Total_Minutes: 		        	#This analyzes the     |
 			copy_PreviouShed.remove(line)								    					 	#the list and takes    |
-	if copy_PreviouShed != []:																		#out the the birth     |
-		nextSched = copy_PreviouShed														        #that already happened |
-	#return nextSched #ainda está a dar tripla lista												#-----------------------
+	nextSched = copy_PreviouShed														            #that already happened |
+                                                                                                    #-----------------------
 
 	
 	
 	#Os doutores esperam até aos pedidos das mães
 	for doctor in doctors:
-		if dateTime.timeToMinutes(doctor[2]) < dateTime.timeToMinutes(requestHour):
-			doctor[2] = requestHour
+		if dateTime.timeToMinutes(doctor[2]) < dateTime.timeToMinutes(nextTime):
+			doctor[2] = nextTime
 				
 	
 	#Enquanto há mães à espera
@@ -114,7 +109,7 @@ def updateSchedule(doctors, requests, previousSched, nextSched):
 		#Se não houver doutores
 		if len(doctors) == 0:
 			#as mães têm de ser mandadas para outra rede de hospitais
-			temp = [requestHour,next_mother[0],"redirected to other network"]
+			temp = [nextTime,next_mother[0],"redirected to other network"]
 			sched.append(temp)
 		else:
 			#Adicionar 20 minutos ao tempo da ultima consulta do chosen_doctor e reorganizar a lista dos doutores
@@ -130,9 +125,11 @@ def updateSchedule(doctors, requests, previousSched, nextSched):
 	nextSched.sort(key=lambda x: dateTime.timeToMinutes(x[0]))
 	return nextSched
 
-
-requestHour = dateTime.getHeaderHour("testSets_v2/testSets_v2/testSet3/requests16h30.txt")
-print(updateSchedule(doctors, requests, previousSched, []))
+doctors = infoFromFiles.sortDoctors("testSets_v2/testSets_v2/testSet1/doctors10h00.txt")
+requests = infoFromFiles.sortMothers("testSets_v2/testSets_v2/testSet1/requests10h30.txt")
+previousSched = infoFromFiles.readScheduleFile("testSets_v2/testSets_v2/testSet1/schedule10h00.txt")
+nextHour = dateTime.getHeaderHour("testSets_v2/testSets_v2/testSet1/requests10h30.txt")
+print(updateSchedule(doctors, requests, previousSched, nextHour))
 		
 		
 		
