@@ -11,16 +11,17 @@ import copy
 
 # print(doctors, requests, previousSched, HeaderHour)
 
-doctors = print(infoFromFiles.readDoctorsFile("testSets_v2/testSets_v2/testSet3/doctors16h00.txt"))
-requests = print(infoFromFiles.readRequestsFile("testSets_v2/testSets_v2/testSet1/requests10h30.txt"))
-previousSched = print(infoFromFiles.readScheduleFile("testSets_v2/testSets_v2/testSet1/schedule10h00.txt"))
+doctors = infoFromFiles.readDoctorsFile("testSets_v2/testSets_v2/testSet1/doctors10h00.txt")
+requests = infoFromFiles.readRequestsFile("testSets_v2/testSets_v2/testSet1/requests10h30.txt")
+previousSched = infoFromFiles.readScheduleFile("testSets_v2/testSets_v2/testSet1/schedule10h00.txt")
+headerhour = dateTime.getHeaderHour("testSets_v2/testSets_v2/testSet1/schedule10h00.txt")
 
 def add20Minutes(doctor, doctorsList):
     lastAssis = doctor[2]
     dayBreak = int(doctor[3])
     weekBreak = doctor[4]
     docsOnBreak = []
-    
+
 	#Adicionar 20 minutos ás horas do último parto mais 1 hora em caso de descanso
     minutes = dateTime.timeToMinutes(lastAssis)
     minutes += 20
@@ -132,16 +133,18 @@ def updateSchedule(doctors, requests, previousSched, nextTime):
 def UpdateDoctors(doctors, nextSched):
 	'''
 	'''
-	while nextSched == len(nextSched):
+	while len(nextSched) != 0:
 		for scheduled in nextSched:
 			for doctor in doctors:
 				if scheduled[2] == doctor[constants.DOCT_NAME_IDX]:
 					nextSched.remove(scheduled)
-					plus_20_doctors = add20Minutes(doctor)
+					vski = add20Minutes(doctor, doctors)
+					doctors.remove(doctor)
+					doctors.append(vski)	
 	return doctors				
 
-	
-	
+print(UpdateDoctors(doctors, updateSchedule(doctors, requests, previousSched, dateTime.add30Minutes(headerhour))))
+#print(updateSchedule(doctors, requests, previousSched, dateTime.add30Minutes(headerhour)))	
 	
 #print(UpdateDoctors(doctors, updateSchedule(doctors, requests, previousSched,[])))
 	
