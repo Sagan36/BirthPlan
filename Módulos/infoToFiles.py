@@ -20,7 +20,7 @@ def updateHeader(fileName):
     Adds 30 minutes to the hours in the header of the file and returns
     it as a str 
     """
-    fp = open(fileName,"r")
+    fp = open(fileName,"r", encoding = "utf-8")
     fileList = fp.readlines()
     header = fileList[:constants.NUM_HEADER_LINES]
 
@@ -49,7 +49,7 @@ def updatedName(fileName):
     Adds 30 minutes to the hours in the name of the file and returns
     it as a str 
     """
-    fp = open(fileName,"r")
+    fp = open(fileName,"r", encoding = "utf-8")
     linesList = fp.readlines()
 
     lastHour = linesList[constants.HOUR_LINE_IDX]
@@ -86,8 +86,8 @@ def writeScheduleFile(sched, header, fileName):
             if j != i[0]:
                 schedStr += ", "
             schedStr = schedStr + j
-            
-        schedStr += "\n"
+        if i != sched[-1]:
+            schedStr += "\n"
 
     allLines = header + schedStr
     fp = open(fileName,"w", encoding = "utf-8")

@@ -11,10 +11,9 @@ import copy
 
 # print(doctors, requests, previousSched, HeaderHour)
 
-doctors = infoFromFiles.readDoctorsFile("testSets_v2/testSets_v2/testSet1/doctors10h00.txt")
-requests = infoFromFiles.readRequestsFile("testSets_v2/testSets_v2/testSet1/requests10h30.txt")
-previousSched = infoFromFiles.readScheduleFile("testSets_v2/testSets_v2/testSet1/schedule10h00.txt")
-headerhour = dateTime.getHeaderHour("testSets_v2/testSets_v2/testSet1/schedule10h00.txt")
+doctors = print(infoFromFiles.readDoctorsFile("testSets_v2/testSets_v2/testSet3/doctors16h00.txt"))
+requests = print(infoFromFiles.readRequestsFile("testSets_v2/testSets_v2/testSet1/requests10h30.txt"))
+previousSched = print(infoFromFiles.readScheduleFile("testSets_v2/testSets_v2/testSet1/schedule10h00.txt"))
 
 def add20Minutes(doctor, doctorsList):
     lastAssis = doctor[2]

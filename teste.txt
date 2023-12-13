@@ -1,11 +1,11 @@
 Organization:
 SmartH
 Hour:
-16h30
+10h30
 Day: 
 10:12:2023
 Schedule:
-16h30, Paula Pinheiro, Manuel Machado
-16h30, Sandra Silva, redirected to other network
-16h40, Tânia Tristão, Orlando Oliveira
-17h00, Rafaela Robalo, Orlando Oliveira
+10h30, Alberta Asunção, Bernardo Biscaia
+10h35, Brunilde Bastos, Carlos Castro
+10h40, Carlota Cunha, Duarte Dantas
+10h45, Fernanda Fonseca, Abílio Amaral
