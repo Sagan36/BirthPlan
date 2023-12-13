@@ -53,7 +53,8 @@ def readDoctorsFile(fileName):
             DoctorsList.append(doctorInfo)
     
     return DoctorsList     
-#print(readDoctorsFile("testSets_v2/testSets_v2/testSet1/doctors10h00.txt"))    
+
+
 
 def readRequestsFile(fileName):
     """
@@ -96,7 +97,7 @@ def readScheduleFile(fileName): #tive que mudar isto pois eu so feio e tambem qu
 
     """
 
-    inFile = removeHeader(open(fileName,"r"))
+    inFile = removeHeader(open(fileName,"r", encoding = "utf-8"))
     HourLine = dateTime.getHeaderHour(fileName)       
     previousSched = [] 
     for line in inFile:
