@@ -15,7 +15,7 @@ doctors = print(infoFromFiles.readDoctorsFile("testSets_v2/testSets_v2/testSet3/
 requests = print(infoFromFiles.readRequestsFile("testSets_v2/testSets_v2/testSet1/requests10h30.txt"))
 previousSched = print(infoFromFiles.readScheduleFile("testSets_v2/testSets_v2/testSet1/schedule10h00.txt"))
 
-def add20Minutes(doctor):
+def add20Minutes(doctor, doctorsList):
     lastAssis = doctor[2]
     dayBreak = int(doctor[3])
     weekBreak = doctor[4]
@@ -37,7 +37,7 @@ def add20Minutes(doctor):
     minutes += 20
     if minutes >= 2400:
         doctor[4] = constants.WKL_LEAVE
-        docsOnBreak = doctors.pop(doctor.index())
+        docsOnBreak = doctorsList.pop(doctorsList.index(doctor))
     else:
         doctor[4] = dateTime.minutesToTime(minutes)
 
@@ -115,7 +115,7 @@ def updateSchedule(doctors, requests, previousSched, nextTime):
 			sched.append(temp)
 		else:
 			#Adicionar 20 minutos ao tempo da ultima consulta do chosen_doctor e reorganizar a lista dos doutores
-			add20Minutes(chosen_doctor)
+			add20Minutes(chosen_doctor, doctors)
 			infoFromFiles.sortDoctors(doctors)
 
 		#Remover o pedido pendente da mãe
@@ -128,22 +128,7 @@ def updateSchedule(doctors, requests, previousSched, nextTime):
 	return nextSched
 
 
-requestHour = dateTime.getHeaderHour("testSets_v2/testSets_v2/testSet3/requests16h30.txt")
-print(updateSchedule(doctors, requests, previousSched, []))
-		
-		
-		
-		#for line in :
-    		#if line[constants.MOTH_RISK_IDX] == "high":
-       			#for line2 in sorted_Doctors:
-            	#if int(line2[constants.DOCT_EXP_IDX]) >= 2:
-                	#Mother_Doctor = line[constants.MOTH_NAME_IDX], line2[constants.DOCT_NAME_IDX]
-                	#season_finale1.append(Mother_Doctor)
-		
-	
 
-#print(updateSchedule(doctors, requests, previousSched, "vski"))	
-        
 def UpdateDoctors(doctors, nextSched):
 	'''
 	'''

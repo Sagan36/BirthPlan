@@ -56,7 +56,9 @@ def plan(doctorsFileName, scheduleFileName, requestsFileName):
     infoToFiles.writeScheduleFile(newSched,SchedHeader, "teste.txt")
 
 
-if __name__ == "__main__":
-  import sys
-  plan(sys.argv[1],sys.argv[2],sys.argv[3])     
+plan("testSets_v2/testSets_v2/testSet3/doctors16h00.txt", "testSets_v2/testSets_v2/testSet3/schedule16h00.txt", "testSets_v2/testSets_v2/testSet3/requests16h30.txt")
+
+# if __name__ == "__main__":
+#   import sys
+#   plan(sys.argv[1],sys.argv[2],sys.argv[3])     
 
