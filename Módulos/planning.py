@@ -11,9 +11,10 @@ import copy
 
 # print(doctors, requests, previousSched, HeaderHour)
 
-doctors = print(infoFromFiles.readDoctorsFile("testSets_v2/testSets_v2/testSet3/doctors16h00.txt"))
-requests = print(infoFromFiles.readRequestsFile("testSets_v2/testSets_v2/testSet1/requests10h30.txt"))
-previousSched = print(infoFromFiles.readScheduleFile("testSets_v2/testSets_v2/testSet1/schedule10h00.txt"))
+#doctors = print(infoFromFiles.readDoctorsFile("testSets_v2/testSets_v2/testSet1/doctors10h00.txt"))
+requests = infoFromFiles.readRequestsFile("testSets_v2/testSets_v2/testSet1/requests10h30.txt")
+previousSched = infoFromFiles.readScheduleFile("testSets_v2/testSets_v2/testSet1/schedule10h00.txt")
+headerhour = dateTime.getHeaderHour("testSets_v2/testSets_v2/testSet1/schedule10h00.txt")
 
 def add20Minutes(doctor, doctorsList):
     lastAssis = doctor[2]
@@ -27,7 +28,7 @@ def add20Minutes(doctor, doctorsList):
     dayBreak += 20
     if dayBreak >= 240:
         minutes += 60
-        dayBreak = 0
+        #dayBreak = 0 
     doctor[3] = str(dayBreak)
     doctor[2] = dateTime.minutesToTime(minutes)
 
@@ -127,56 +128,24 @@ def updateSchedule(doctors, requests, previousSched, nextTime):
 	nextSched.sort(key=lambda x: dateTime.timeToMinutes(x[0]))
 	return nextSched
 
-
+doctors = infoFromFiles.readDoctorsFile("testSets_v2/testSets_v2/testSet1/doctors10h00.txt")
+doctors2 = infoFromFiles.readDoctorsFile("testSets_v2/testSets_v2/testSet1/doctors10h00.txt")
 
 def UpdateDoctors(doctors, nextSched):
 	'''
-	'''
+	'''	
+	copied_doctors = copy.deepcopy(doctors)
 	while len(nextSched) != 0:
 		for scheduled in nextSched:
-			for doctor in doctors:
+			nextSched.remove(scheduled)	
+			for doctor in copied_doctors:
 				if scheduled[2] == doctor[constants.DOCT_NAME_IDX]:
-					nextSched.remove(scheduled)
-					vski = add20Minutes(doctor, doctors)
 					doctors.remove(doctor)
-					doctors.append(vski)	
+					vski = add20Minutes(doctor, doctors)					
+					doctors.append(vski)
+	#return Copy_Doctors			
 	return doctors				
 
-print(UpdateDoctors(doctors, updateSchedule(doctors, requests, previousSched, dateTime.add30Minutes(headerhour))))
-#print(updateSchedule(doctors, requests, previousSched, dateTime.add30Minutes(headerhour)))	
+print(UpdateDoctors(doctors2, updateSchedule(doctors, requests, previousSched, dateTime.add30Minutes(headerhour))))
+#print(updateSchedule(doctors, requests, previousSched, headerhour))	
 	
-#print(UpdateDoctors(doctors, updateSchedule(doctors, requests, previousSched,[])))
-	
-	#for line in requests:
-       # if line[constants.MOTH_RISK_IDX] == "high":
-            #for line2 in doctors:
-                #if line2[constants.DOCT_EXP_IDX]:
-                    #both = line[constants.MOTH_NAME_IDX], line2[constants.DOCT_NAME_IDX]
-                    #nextSched.append(both)de
-	
-	
-    
-	
-	
-	
-	
-	#return nextSched
-
-
-
-
-
-                	
-
-
-
-
-
-
-
-
-
-
-
-
-
