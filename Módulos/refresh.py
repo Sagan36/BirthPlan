@@ -53,7 +53,7 @@ def plan(doctorsFileName, scheduleFileName, requestsFileName):
     SchedHeader = infoToFiles.updateHeader(scheduleFileName)
     SchedName = infoToFiles.updatedName(scheduleFileName)
 
-    infoToFiles.writeScheduleFile(newSched,SchedHeader, "teste.txt")
+    infoToFiles.writeScheduleFile(newSched,SchedHeader, "testSets_v2/testSets_v2/testSet3/schedule16h00.txt")
 
 
 # plan("testSets_v2/testSets_v2/testSet3/doctors16h00.txt", "testSets_v2/testSets_v2/testSet3/schedule16h00.txt", "testSets_v2/testSets_v2/testSet3/requests16h30.txt")

@@ -146,6 +146,11 @@ def UpdateDoctors(doctors, nextSched):
 	#return Copy_Doctors			
 	return doctors				
 
+<<<<<<< HEAD
 print(UpdateDoctors(doctors2, updateSchedule(doctors, requests, previousSched, dateTime.add30Minutes(headerhour))))
 #print(updateSchedule(doctors, requests, previousSched, headerhour))	
+=======
+#print(UpdateDoctors(doctors, updateSchedule(doctors, requests, previousSched, dateTime.add30Minutes(headerhour))))
+#print(updateSchedule(doctors, requests, previousSched, dateTime.add30Minutes(headerhour)))	
+>>>>>>> bf4ef4fdd9df14a9d5756c308ddbf12004128ea1
 	
