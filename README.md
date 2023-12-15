@@ -16,6 +16,7 @@ Projeto Final do curso de Programação I
  - Pq é que no testset2 fica 14:30h!?!?!? #O stor vai lançar outro testset :D 
  - Quando os doutores não trabalham, é adicionada á msm os minutos até intrevalo? #NAO
  - TestSet1 Bernardo está disponivel as 10h10 e está a fazer uma consulta às 10h10
+ - 07h30 está como 7h30??? 
 
 ### Erros Conhecidos:
 

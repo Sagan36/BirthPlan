@@ -142,7 +142,7 @@ def UpdateDoctors(doctors, nextSched):
 					doctors.append(vski)	
 	return doctors				
 
-print(UpdateDoctors(doctors, updateSchedule(doctors, requests, previousSched, dateTime.add30Minutes(headerhour))))
+#print(UpdateDoctors(doctors, updateSchedule(doctors, requests, previousSched, dateTime.add30Minutes(headerhour))))
 #print(updateSchedule(doctors, requests, previousSched, dateTime.add30Minutes(headerhour)))	
 	
 #print(UpdateDoctors(doctors, updateSchedule(doctors, requests, previousSched,[])))
