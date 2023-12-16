@@ -28,7 +28,7 @@ def minutesToInt(time):
     
 
 
-def intToTime(hour, minutes):
+def intToTime(hour, minutes, add0 = True):
     """
     Converts the two int's given to a str in the format HHhMM, where H is hours and M minutes
     Requires: hour and minutes are int's, hour < 12 and minutes < 60 
@@ -37,8 +37,9 @@ def intToTime(hour, minutes):
     h = str(hour)
     m = str(minutes)
 
-    if hour < 10:
-        h = "0" + h
+    if add0:
+        if hour < 10:
+            h = "0" + h
 
     if minutes < 10:
         m = "0" + m
@@ -58,13 +59,15 @@ def timeToMinutes(time):
     
     return totalMins
 
-def minutesToTime(minutes):
+def minutesToTime(minutes, add0 = True):
     '''
     '''
     hours = minutes // 60
     minutes -= hours*60
-    return intToTime(hours, minutes)
+    return intToTime(hours, minutes, add0)
 
+
+#print(minutesToTime())
 
 #print(intToTime())
 

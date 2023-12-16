@@ -121,8 +121,8 @@ def writeDoctorsFile(doctors, header, fileName):
             if j != i[0]:
                 docStr += ", "
             docStr = docStr + j
-            
-        docStr += "\n"
+        if i != doctors[-1]:
+            docStr += "\n"
 
     allLines = header + docStr
     fp = open(fileName,"w", encoding = "utf-8")

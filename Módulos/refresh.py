@@ -62,18 +62,24 @@ def plan(doctorsFileName, scheduleFileName, requestsFileName):
     previousDoctors_Sorted = infoFromFiles.sortDoctors(previousDoctors)
     previousRequests_Sorted = infoFromFiles.sortMothers(previousRequests)
 
-    newSched = planning.updateSchedule(previousDoctors_Sorted, previousRequests_Sorted, previousSched, nextHour)
+    newSched, newDocs = planning.updateSchedule(previousDoctors_Sorted, previousRequests_Sorted, previousSched, nextHour)
     #newDoctors = planning.updateDoctors()
 
     SchedHeader = infoToFiles.updateHeader(scheduleFileName)
     SchedName = infoToFiles.updatedName(scheduleFileName)
 
-    infoToFiles.writeScheduleFile(newSched,SchedHeader, "testSets_v2/testSets_v2/testSet3/schedule16h00.txt")
+    DocsHeader = infoToFiles.updateHeader(doctorsFileName)
+    DocsName = infoToFiles.updatedName(doctorsFileName)
+
+    
+    infoToFiles.writeScheduleFile(newSched,SchedHeader, "teste_sched.txt")
+    infoToFiles.writeDoctorsFile(newDocs,DocsHeader, "teste_docs.txt")
 
 
-plan("testSets_v2/testSets_v2/testSet3/doctors16h00.txt", "testSets_v2/testSets_v2/testSet3/schedule16h00.txt", "testSets_v2/testSets_v2/testSet3/requests16h30.txt")
 
-if __name__ == "__main__":
-  import sys
-  plan(sys.argv[1],sys.argv[2],sys.argv[3])     
+plan("testSets_v2/testSets_v2/testSet1/doctors10h00.txt", "testSets_v2/testSets_v2/testSet1/schedule10h00.txt", "testSets_v2/testSets_v2/testSet1/requests10h30.txt")
+
+# if __name__ == "__main__":
+#   import sys
+#   plan(sys.argv[1],sys.argv[2],sys.argv[3])     
 

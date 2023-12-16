@@ -11,37 +11,34 @@ import copy
 
 # print(doctors, requests, previousSched, HeaderHour)
 
-doctors = print(infoFromFiles.readDoctorsFile("testSets_v2/testSets_v2/testSet3/doctors16h00.txt"))
-requests = print(infoFromFiles.readRequestsFile("testSets_v2/testSets_v2/testSet1/requests10h30.txt"))
-previousSched = print(infoFromFiles.readScheduleFile("testSets_v2/testSets_v2/testSet1/schedule10h00.txt"))
 
-def add20Minutes(doctor, doctorsList):
-    lastAssis = doctor[2]
-    dayBreak = int(doctor[3])
-    weekBreak = doctor[4]
-    docsOnBreak = []
+
+def add20Minutes(doctor, doctorsList, docsOnBreak):
+	lastAssis = doctor[2]
+	dayBreak = int(doctor[3])
+	weekBreak = doctor[4]
+	
 
 	#Adicionar 20 minutos ás horas do último parto mais 1 hora em caso de descanso
-    minutes = dateTime.timeToMinutes(lastAssis)
-    minutes += 20
-    dayBreak += 20
-    if dayBreak >= 240:
-        minutes += 60
-        dayBreak = 0
-    doctor[3] = str(dayBreak)
-    doctor[2] = dateTime.minutesToTime(minutes)
+	minutes = dateTime.timeToMinutes(lastAssis)
+	minutes += 20
+	dayBreak += 20
+	if dayBreak >= 240:
+		minutes += 60
+	doctor[3] = str(dayBreak)
+	doctor[2] = dateTime.minutesToTime(minutes)
 
 
-    #Adicionar 20 minutos ás horas do último descanso
-    minutes = dateTime.timeToMinutes(weekBreak)
-    minutes += 20
-    if minutes >= 2400:
-        doctor[4] = constants.WKL_LEAVE
-        docsOnBreak = doctorsList.pop(doctorsList.index(doctor))
-    else:
-        doctor[4] = dateTime.minutesToTime(minutes)
+	#Adicionar 20 minutos ás horas do último descanso
+	minutes = dateTime.timeToMinutes(weekBreak)
+	minutes += 20
+	if minutes >= 2400:
+		doctor[2] = constants.WKL_LEAVE
+		docsOnBreak.append(doctorsList.pop(doctorsList.index(doctor)))
+	
+	doctor[4] = dateTime.minutesToTime(minutes, False)
 
-    return doctor, docsOnBreak
+	return docsOnBreak
 
 
 
@@ -65,12 +62,11 @@ def updateSchedule(doctors, requests, previousSched, nextTime):
 	of the project (omitted here for the sake of readability).
 	"""
 	sched = []
+	docsOnBreak = []
 
 	Total_Minutes = dateTime.timeToMinutes(nextTime)
 	
 	copy_PreviouShed = copy.deepcopy(previousSched)
-	copy_Doctors = copy.deepcopy(doctors)
-	copy_Requests = copy.deepcopy(requests)
 
 	for line in previousSched:               							           					#-----------------------
 		if dateTime.timeToMinutes(line[constants.SCHE_HOUR_IDX]) <= Total_Minutes: 		        	#This analyzes the     |
@@ -115,7 +111,7 @@ def updateSchedule(doctors, requests, previousSched, nextTime):
 			sched.append(temp)
 		else:
 			#Adicionar 20 minutos ao tempo da ultima consulta do chosen_doctor e reorganizar a lista dos doutores
-			add20Minutes(chosen_doctor, doctors)
+			docsOnBreak = add20Minutes(chosen_doctor, doctors, docsOnBreak)
 			infoFromFiles.sortDoctors(doctors)
 
 		#Remover o pedido pendente da mãe
@@ -125,25 +121,28 @@ def updateSchedule(doctors, requests, previousSched, nextTime):
 	#Retornar o schedule com o antigo + novo, organizado por tempo de atendimento
 	nextSched = nextSched + sched
 	nextSched.sort(key=lambda x: dateTime.timeToMinutes(x[0]))
-	return nextSched
+	#Return updated doctor's hours plus those that went on weekly leave, sorted by name.´
+	nextDoctors = doctors + docsOnBreak
+	nextDoctors.sort(key=lambda x: x[0])
+	return nextSched, nextDoctors
 
 
 
-def UpdateDoctors(doctors, nextSched):
+def UpdateDoctors(doctors, docsOnBreak):
 	'''
 	'''
-	while len(nextSched) != 0:
-		for scheduled in nextSched:
-			for doctor in doctors:
-				if scheduled[2] == doctor[constants.DOCT_NAME_IDX]:
-					nextSched.remove(scheduled)
-					vski = add20Minutes(doctor, doctors)
-					doctors.remove(doctor)
-					doctors.append(vski)	
-	return doctors				
+	doctors 
+	return doctors	
 
-#print(UpdateDoctors(doctors, updateSchedule(doctors, requests, previousSched, dateTime.add30Minutes(headerhour))))
-#print(updateSchedule(doctors, requests, previousSched, dateTime.add30Minutes(headerhour)))	
+
+doctors = infoFromFiles.readDoctorsFile("testSets_v2/testSets_v2/testSet1/doctors10h00.txt")
+requests = infoFromFiles.readRequestsFile("testSets_v2/testSets_v2/testSet1/requests10h30.txt")
+previousSched = infoFromFiles.readScheduleFile("testSets_v2/testSets_v2/testSet1/schedule10h00.txt")
+nextHour = dateTime.getHeaderHour("testSets_v2/testSets_v2/testSet1/requests10h30.txt")
+
+
+#print(UpdateDoctors(doctors, updateSchedule(doctors, requests, previousSched, nextHour)))
+#print(updateSchedule(doctors, requests, previousSched, nextHour))	
 	
 #print(UpdateDoctors(doctors, updateSchedule(doctors, requests, previousSched,[])))
 	
