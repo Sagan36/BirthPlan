@@ -64,7 +64,6 @@ def plan(doctorsFileName, scheduleFileName, requestsFileName):
     previousRequests_Sorted = infoFromFiles.sortMothers(previousRequests)
 
     newSched, newDocs = planning.updateSchedule(previousDoctors_Sorted, previousRequests_Sorted, previousSched, nextHour)
-    #newDoctors = planning.updateDoctors()
 
     SchedHeader = infoToFiles.updateHeader(scheduleFileName)
     SchedName = infoToFiles.updatedName(scheduleFileName)
@@ -77,10 +76,7 @@ def plan(doctorsFileName, scheduleFileName, requestsFileName):
     infoToFiles.writeDoctorsFile(newDocs,DocsHeader, "teste_docs.txt")
 
 
-
-plan("testSets_v2/testSets_v2/testSet1/doctors10h00.txt", "testSets_v2/testSets_v2/testSet1/schedule10h00.txt", "testSets_v2/testSets_v2/testSet1/requests10h30.txt")
-
-# if __name__ == "__main__":
-#   import sys
-#   plan(sys.argv[1],sys.argv[2],sys.argv[3])     
+if __name__ == "__main__":
+   import sys
+   plan(sys.argv[1],sys.argv[2],sys.argv[3])     
 
