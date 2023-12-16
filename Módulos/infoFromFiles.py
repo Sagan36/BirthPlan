@@ -1,15 +1,12 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 # 2023-2024 Programação 1 (LTI)
 # Grupo 160
 # 62214 Luís Lima
 # 62269 Dinis Garcia
 
-#ERROS:
-#meter ", encoding = "utf-8"  nos opens
-#O QUE FIZ
-#dei fix no erro mas ve se concordas antes de por em todas as funções
-import constants
+
+
 import dateTime
 def removeHeader(fileOpen):
     '''
@@ -48,7 +45,7 @@ def readDoctorsFile(fileName):
     
     DoctorsList=[]
     for line in inFile:
-        if line.strip():
+        if line.strip():#If there are any empty lines,it removes them.
             doctorInfo = line.rstrip().split(", ")
             DoctorsList.append(doctorInfo)
     
@@ -82,7 +79,7 @@ def readRequestsFile(fileName):
 
 
 
-def readScheduleFile(fileName): #tive que mudar isto pois eu so feio e tambem que eu precisava da hora do header e n sabia como o obtelo entao fiz assim
+def readScheduleFile(fileName):
     """
     Reads a file with a list of the last schedule into a collection.
 
@@ -91,71 +88,84 @@ def readScheduleFile(fileName): #tive que mudar isto pois eu so feio e tambem qu
     a list of previous schedule organized as in the examples provided in
     the general specification (omitted here for the sake of readability).
     Ensures:
-    Returns list of lists where each list corresponds to a scheduled parturition listed in
-    the file fileName (with all the info pieces belonging to that parturition),
+    Returns list of lists where each list corresponds to a 
+    scheduled parturition listed in the file fileName 
+    (with all the info pieces belonging to that parturition),
     following the order provided in the lines of the file.
 
     """
-
     inFile = removeHeader(open(fileName,"r", encoding = "utf-8"))
     HourLine = dateTime.getHeaderHour(fileName)       
     previousSched = [] 
     for line in inFile:
-        if line.strip(): #Tipo isto ve se existe algum caraters na linha que esta a analisar e se existir faz o codigo abaixo se nao nao o faz, foi ao chat gpt pq a maneira que tinhas dito acho que n tava a funcionar mas tenta tu 
-            scheduleData = line.rstrip().split(", ")# eu acho que este comando é inututil vai dar a mesma merda sem ele 
+        if line.strip(): 
+            scheduleData = line.rstrip().split(", ")
             previousSched.append(scheduleData)
     return previousSched
 
-#print(readScheduleFile("testSets_v2/testSets_v2/testSet1/schedule10h00.txt"))
 
-def sortMothers(sortedMoms): #Se calhar metemos isto a receber logo o sortedMoms?
+
+def sortMothers(sortedMoms): 
     '''
     Sorts list of requests by service priority.
 
     Requires:
-    FileName is the name of a non-empty .txt file of the pending requests
-    organized as in the examples provided in the general specification 
-    (omitted here for the sake of readability).
+    sortedMoms is a list of lists that came from 
+    the function readRequestsFile.
     Ensures:
     Returns list of requests sorted by Risk -> Urgency -> Age -> Name
     '''
+    #Assign values to the strings to match the sort we want.
     Color_Order = {"red":1, "yellow":2, "green":3}
     Risk_Order = {"high":1, "medium":2, "low":3}
-    sortedMoms.sort(key=lambda mother: (Risk_Order[mother[constants.MOTH_RISK_IDX]], Color_Order[mother[constants.MOTH_COLOR_IDX]], \
-                                        (-int(mother[constants.MOTH_AGE_IDX])), mother[constants.MOTH_NAME_IDX]))           
+    sortedMoms.sort(key=lambda mother: (Risk_Order[mother[constants.MOTH_RISK_IDX]],\
+    Color_Order[mother[constants.MOTH_COLOR_IDX]],\
+    (-int(mother[constants.MOTH_AGE_IDX])), mother[constants.MOTH_NAME_IDX]))           
     return sortedMoms
-    #-int é para fazer decresecnte
 
 
 
-def sortDoctors(sorted_Doctors): #UPdate contrato
+def sortDoctors(sorted_Doctors): 
     '''
     Sorts list of doctors by service availability.
 
     Requires:
-    FileName is the name of a non-empty .txt file of the available doctors
-    organized as in the examples provided in the general specification 
-    (omitted here for the sake of readability).
+    sorted_Doctors is a list of lists that came from 
+    the function readDoctorsFile.
     Ensures:
-    Returns list of doctors sorted by First- -> Experience -> Time-to-Break -> Name
+    Returns list of doctors sorted 
+    by First- -> Experience -> Time-to-Break -> Name
     '''
-    sorted_Doctors.sort(key=lambda doctor: (dateTime.timeToMinutes(doctor[constants.DOCT_LASTBIRTH_IDX]), (-int(doctor[constants.DOCT_EXP_IDX])), doctor[constants.DOCT_ACCUMULATOR_IDX], doctor[constants.DOCT_LASTREST_IDX], doctor[constants.DOCT_NAME_IDX]))
+    sorted_Doctors.sort(key=lambda doctor: (dateTime.timeToMinutes \
+    (doctor[constants.DOCT_LASTBIRTH_IDX]), (-int(doctor[constants.DOCT_EXP_IDX])),\
+    doctor[constants.DOCT_ACCUMULATOR_IDX], doctor[constants.DOCT_LASTREST_IDX],\
+    doctor[constants.DOCT_NAME_IDX]))
 
     return sorted_Doctors
 
+
+
 def type_Header(fileName):
     '''
-    '''
+    Analyzes the header of a file in 
+    search of his type.
 
+    Requires:
+    fileName is str with the name of a .txt file containing
+    the header of the file doctors/requests/schedules we want to analyze.
+    Ensures: 
+    The type of the file that can derive from requests/doctors/schedule.
+    '''
     inFile = open(fileName,"r", encoding = "utf-8")       
 
     allLines = inFile.readlines()
 
     FileType = allLines[constants.TYPE_HEADER] 
     
-    FileType = FileType[0:8]
+    FileType = FileType[0:7]
+
     inFile.close()
 
     return FileType
 
-#print(type_Header("testSets_v2/testSets_v2/testSet1/doctors10h00.txt"))
+print(type_Header())
