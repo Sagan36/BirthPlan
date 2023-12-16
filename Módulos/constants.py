@@ -16,7 +16,8 @@
 # Value for weekly pause in the output schedule
 WKL_LEAVE = "weekly leave"
 
-
+# Indentifies the type of the file while using the header
+TYPE_HEADER = 6
 
 # In a file:
 # Number of header's lines
