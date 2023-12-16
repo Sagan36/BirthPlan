@@ -4,13 +4,11 @@
 # Grupo 160
 # 62214 Luís Lima
 # 62269 Dinis Garcia
+
 import infoFromFiles
 import constants
 import dateTime
 import copy
-
-# print(doctors, requests, previousSched, HeaderHour)
-
 
 
 def add20Minutes(doctor, doctorsList, docsOnBreak):
@@ -23,7 +21,7 @@ def add20Minutes(doctor, doctorsList, docsOnBreak):
 	minutes = dateTime.timeToMinutes(lastAssis)
 	minutes += 20
 	dayBreak += 20
-	if dayBreak >= 240:
+	if dayBreak >= 240 and dayBreak < 260:
 		minutes += 60
 	doctor[3] = str(dayBreak)
 	doctor[2] = dateTime.minutesToTime(minutes)
@@ -32,6 +30,8 @@ def add20Minutes(doctor, doctorsList, docsOnBreak):
 	#Adicionar 20 minutos ás horas do último descanso
 	minutes = dateTime.timeToMinutes(weekBreak)
 	minutes += 20
+
+
 	if minutes >= 2400:
 		doctor[2] = constants.WKL_LEAVE
 		docsOnBreak.append(doctorsList.pop(doctorsList.index(doctor)))
@@ -124,15 +124,8 @@ def updateSchedule(doctors, requests, previousSched, nextTime):
 	#Return updated doctor's hours plus those that went on weekly leave, sorted by name.´
 	nextDoctors = doctors + docsOnBreak
 	nextDoctors.sort(key=lambda x: x[0])
+
 	return nextSched, nextDoctors
-
-
-
-def UpdateDoctors(doctors, docsOnBreak):
-	'''
-	'''
-	doctors 
-	return doctors	
 
 
 doctors = infoFromFiles.readDoctorsFile("testSets_v2/testSets_v2/testSet1/doctors10h00.txt")
