@@ -41,7 +41,7 @@ def add20Minutes(doctor, doctorsList):
     else:
         doctor[4] = dateTime.minutesToTime(minutes)
 
-    return doctor #doctors
+    return doctor, docsOnBreak
 
 
 
