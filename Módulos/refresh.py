@@ -53,12 +53,12 @@ def plan(doctorsFileName, scheduleFileName, requestsFileName):
     SchedHeader = infoToFiles.updateHeader(scheduleFileName)
     SchedName = infoToFiles.updatedName(scheduleFileName)
 
-    infoToFiles.writeScheduleFile(newSched,SchedHeader, "testSets_v2/testSets_v2/testSet3/schedule16h00.txt")
+    infoToFiles.writeScheduleFile(newSched,SchedHeader, "teste.txt")
 
 
-# plan("testSets_v2/testSets_v2/testSet3/doctors16h00.txt", "testSets_v2/testSets_v2/testSet3/schedule16h00.txt", "testSets_v2/testSets_v2/testSet3/requests16h30.txt")
+plan("testSets_v2/testSets_v2/testSet1/doctors10h00.txt", "testSets_v2/testSets_v2/testSet1/schedule10h00.txt", "testSets_v2/testSets_v2/testSet1/requests10h30.txt")
 
-if __name__ == "__main__":
-  import sys
-  plan(sys.argv[1],sys.argv[2],sys.argv[3])     
+# if __name__ == "__main__":
+#   import sys
+#   plan(sys.argv[1],sys.argv[2],sys.argv[3])     
 

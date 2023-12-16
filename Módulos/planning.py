@@ -11,9 +11,7 @@ import copy
 
 # print(doctors, requests, previousSched, HeaderHour)
 
-doctors = print(infoFromFiles.readDoctorsFile("testSets_v2/testSets_v2/testSet3/doctors16h00.txt"))
-requests = print(infoFromFiles.readRequestsFile("testSets_v2/testSets_v2/testSet1/requests10h30.txt"))
-previousSched = print(infoFromFiles.readScheduleFile("testSets_v2/testSets_v2/testSet1/schedule10h00.txt"))
+
 
 def add20Minutes(doctor, doctorsList):
     lastAssis = doctor[2]
@@ -69,8 +67,6 @@ def updateSchedule(doctors, requests, previousSched, nextTime):
 	Total_Minutes = dateTime.timeToMinutes(nextTime)
 	
 	copy_PreviouShed = copy.deepcopy(previousSched)
-	copy_Doctors = copy.deepcopy(doctors)
-	copy_Requests = copy.deepcopy(requests)
 
 	for line in previousSched:               							           					#-----------------------
 		if dateTime.timeToMinutes(line[constants.SCHE_HOUR_IDX]) <= Total_Minutes: 		        	#This analyzes the     |
@@ -129,21 +125,21 @@ def updateSchedule(doctors, requests, previousSched, nextTime):
 
 
 
-def UpdateDoctors(doctors, nextSched):
+def UpdateDoctors(doctors, docsOnBreak):
 	'''
 	'''
-	while len(nextSched) != 0:
-		for scheduled in nextSched:
-			for doctor in doctors:
-				if scheduled[2] == doctor[constants.DOCT_NAME_IDX]:
-					nextSched.remove(scheduled)
-					vski = add20Minutes(doctor, doctors)
-					doctors.remove(doctor)
-					doctors.append(vski)	
-	return doctors				
+	doctors 
+	return doctors	
 
-#print(UpdateDoctors(doctors, updateSchedule(doctors, requests, previousSched, dateTime.add30Minutes(headerhour))))
-#print(updateSchedule(doctors, requests, previousSched, dateTime.add30Minutes(headerhour)))	
+
+doctors = infoFromFiles.readDoctorsFile("testSets_v2/testSets_v2/testSet1/doctors10h00.txt")
+requests = infoFromFiles.readRequestsFile("testSets_v2/testSets_v2/testSet1/requests10h30.txt")
+previousSched = infoFromFiles.readScheduleFile("testSets_v2/testSets_v2/testSet1/schedule10h00.txt")
+nextHour = dateTime.getHeaderHour("testSets_v2/testSets_v2/testSet1/requests10h30.txt")
+
+
+#print(UpdateDoctors(doctors, updateSchedule(doctors, requests, previousSched, nextHour)))
+#print(updateSchedule(doctors, requests, previousSched, nextHour))	
 	
 #print(UpdateDoctors(doctors, updateSchedule(doctors, requests, previousSched,[])))
 	
