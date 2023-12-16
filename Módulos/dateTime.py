@@ -63,22 +63,7 @@ def minutesToTime(minutes, add0 = True):
     '''
     '''
     hours = minutes // 60
-    minutes -
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    = hours*60
+    minutes -= hours*60
     return intToTime(hours, minutes, add0)
 
 
