@@ -43,12 +43,13 @@ def plan(doctorsFileName, scheduleFileName, requestsFileName):
     HeaderType_Requests =  infoFromFiles.type_Header(requestsFileName)
     HeaderType_Schedule = infoFromFiles.type_Header(scheduleFileName)
 
-    if HeaderType_Doctors == doctorsFileName[0:6]:
-       raise File_head_error("scope inconsistency between name and header in file doctorsFileName.")
-    if HeaderType_Requests == requestsFileName[0:6]:
-       raise File_head_error("scope inconsistency between name and header in file requestsFileName.")
-    if HeaderType_Schedule == scheduleFileName[0:6]:
-       raise File_head_error("scope inconsistency between name and header in file requestsFileName.")
+
+    if HeaderType_Doctors[0:7].lower() != doctorsFileName[-16:-9]:
+       raise IOError("File head error: scope inconsistency between name and header in file doctorsFileName.")
+    if HeaderType_Requests.lower() == requestsFileName[-17:-9]:
+       raise IOError("File head error: scope inconsistency between name and header in file requestsFileName.")
+    if HeaderType_Schedule.lower() != scheduleFileName[-17:-9]:
+       raise IOError("File head error: scope inconsistency between name and header in file scheduleFileName.")
 
          
 

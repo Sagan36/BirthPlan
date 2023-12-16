@@ -153,9 +153,9 @@ def type_Header(fileName):
 
     FileType = allLines[constants.TYPE_HEADER] 
     
-    FileType = FileType[0:7]
+    FileType = FileType[0:8]
     inFile.close()
 
     return FileType
 
-print(type_Header("testSets_v2/testSets_v2/testSet1/doctors10h00.txt"))
+#print(type_Header("testSets_v2/testSets_v2/testSet1/doctors10h00.txt"))
