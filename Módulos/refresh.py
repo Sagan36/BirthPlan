@@ -39,10 +39,25 @@ def plan(doctorsFileName, scheduleFileName, requestsFileName):
     scheduleFileName and requestsFileName, and are written in the same directory
     of the latter.
     """
+    HeaderType_Doctors = infoFromFiles.type_Header(doctorsFileName)
+    HeaderType_Requests =  infoFromFiles.type_Header(requestsFileName)
+    HeaderType_Schedule = infoFromFiles.type_Header(scheduleFileName)
+
+    if HeaderType_Doctors == doctorsFileName[0:6]:
+       raise File_head_error("scope inconsistency between name and header in file doctorsFileName.")
+    if HeaderType_Requests == requestsFileName[0:6]:
+       raise File_head_error("scope inconsistency between name and header in file requestsFileName.")
+    if HeaderType_Schedule == scheduleFileName[0:6]:
+       raise File_head_error("scope inconsistency between name and header in file requestsFileName.")
+
+         
+
+
     previousDoctors = infoFromFiles.readDoctorsFile(doctorsFileName)
     previousRequests = infoFromFiles.readRequestsFile(requestsFileName)
     previousSched = infoFromFiles.readScheduleFile(scheduleFileName)
     nextHour = dateTime.getHeaderHour(requestsFileName)
+    
 
     previousDoctors_Sorted = infoFromFiles.sortDoctors(previousDoctors)
     previousRequests_Sorted = infoFromFiles.sortMothers(previousRequests)
@@ -56,7 +71,7 @@ def plan(doctorsFileName, scheduleFileName, requestsFileName):
     infoToFiles.writeScheduleFile(newSched,SchedHeader, "testSets_v2/testSets_v2/testSet3/schedule16h00.txt")
 
 
-# plan("testSets_v2/testSets_v2/testSet3/doctors16h00.txt", "testSets_v2/testSets_v2/testSet3/schedule16h00.txt", "testSets_v2/testSets_v2/testSet3/requests16h30.txt")
+plan("testSets_v2/testSets_v2/testSet3/doctors16h00.txt", "testSets_v2/testSets_v2/testSet3/schedule16h00.txt", "testSets_v2/testSets_v2/testSet3/requests16h30.txt")
 
 if __name__ == "__main__":
   import sys

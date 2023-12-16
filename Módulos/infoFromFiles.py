@@ -142,3 +142,20 @@ def sortDoctors(sorted_Doctors): #UPdate contrato
     sorted_Doctors.sort(key=lambda doctor: (dateTime.timeToMinutes(doctor[constants.DOCT_LASTBIRTH_IDX]), (-int(doctor[constants.DOCT_EXP_IDX])), doctor[constants.DOCT_ACCUMULATOR_IDX], doctor[constants.DOCT_LASTREST_IDX], doctor[constants.DOCT_NAME_IDX]))
 
     return sorted_Doctors
+
+def type_Header(fileName):
+    '''
+    '''
+
+    inFile = open(fileName,"r", encoding = "utf-8")       
+
+    allLines = inFile.readlines()
+
+    FileType = allLines[constants.TYPE_HEADER] 
+    
+    FileType = FileType[0:7]
+    inFile.close()
+
+    return FileType
+
+print(type_Header("testSets_v2/testSets_v2/testSet1/doctors10h00.txt"))
