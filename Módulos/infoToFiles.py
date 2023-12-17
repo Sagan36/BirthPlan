@@ -110,8 +110,8 @@ def writeDoctorsFile(doctors, header, fileName):
     the general specification (omitted here for the sake of readability);
     fileName is a str with the name of a .txt file.
     Ensures:
-    writing of file named fileName representing the informations of every available doctor,
-    one per line, as organized in the examples provided
+    writing of file named fileName representing the informations of every
+    available doctor,one per line, as organized in the examples provided
     in the general specification (omitted here for the sake of readability); 
     the lines in this file keeps the ordering top to bottom of 
     the statistics as ordered head to tail in doctors.

@@ -21,7 +21,8 @@ def plan(doctorsFileName, scheduleFileName, requestsFileName):
    doctorsFileName is a str with the name of a .txt file containing a list
    of doctors at date d and time t, organized as in the examples provided;
    scheduleFileName is a str with the name of a .txt file containing a list
-   of birth assistances assigned to doctors at date d and time t, as in the examples provided;
+   of birth assistances assigned to doctors at date d and time t, as in the
+   examples provided;
    requestsFileName is a str with the name of a .txt file containing a list
    of cruises requested at date d and time t+30mins;
    Ensures:
@@ -42,15 +43,18 @@ def plan(doctorsFileName, scheduleFileName, requestsFileName):
 
    
    if headerType_Doctors.lower() != "doctors":
-      message = "File head error: scope inconsistency between name and header in file " + doctorsFileName + "."
+      message = "File head error: scope inconsistency between name and header in file " \
+         + doctorsFileName + "."
       raise IOError(message)
     
    if headerType_Requests.lower() != "mothers":
-      message = "File head error: scope inconsistency between name and header in file " + requestsFileName + "."
+      message = "File head error: scope inconsistency between name and header in file " \
+         + requestsFileName + "."
       raise IOError(message)
     
    if headerType_Schedule.lower() != "schedule":
-      message = "File head error: scope inconsistency between name and header in file " + scheduleFileName + "."
+      message = "File head error: scope inconsistency between name and header in file "\
+         + scheduleFileName + "."
       raise IOError(message)         
 
 
@@ -65,7 +69,8 @@ def plan(doctorsFileName, scheduleFileName, requestsFileName):
    previousRequests_Sorted = infoFromFiles.sortMothers(previousRequests)
 
    #Update info
-   newSched, newDocs = planning.updateofFiles(previousDoctors_Sorted, previousRequests_Sorted, previousSched, nextHour)
+   newSched, newDocs = planning.updateofFiles(previousDoctors_Sorted,\
+                     previousRequests_Sorted, previousSched, nextHour)
 
    #Write updated info to files
    schedHeader = infoToFiles.updateHeader(scheduleFileName)

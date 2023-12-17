@@ -120,9 +120,12 @@ def sortMothers(sortedMoms):
     #Assign values to the strings to match the sort we want.
     Color_Order = {"red":1, "yellow":2, "green":3}
     Risk_Order = {"high":1, "medium":2, "low":3}
-    sortedMoms.sort(key=lambda mother: (Risk_Order[mother[constants.MOTH_RISK_IDX]],\
+
+    sortedMoms.sort(key=lambda mother:\
+    (Risk_Order[mother[constants.MOTH_RISK_IDX]],\
     Color_Order[mother[constants.MOTH_COLOR_IDX]],\
-    (-int(mother[constants.MOTH_AGE_IDX])), mother[constants.MOTH_NAME_IDX]))           
+    (-int(mother[constants.MOTH_AGE_IDX])), mother[constants.MOTH_NAME_IDX]))
+
     return sortedMoms
 
 
@@ -138,9 +141,11 @@ def sortDoctors(sorted_Doctors):
     Returns list of doctors sorted 
     by First Available -> Experience -> Time-to-Break -> Name.
     '''
-    sorted_Doctors.sort(key=lambda doctor: (dateTime.timeToMinutes \
-    (doctor[constants.DOCT_LASTBIRTH_IDX]), (-int(doctor[constants.DOCT_EXP_IDX])),\
-    doctor[constants.DOCT_ACCUMULATOR_IDX], doctor[constants.DOCT_LASTREST_IDX],\
+    sorted_Doctors.sort(key=lambda doctor: (dateTime.timeToMinutes\
+    (doctor[constants.DOCT_LASTBIRTH_IDX]),\
+    (-int(doctor[constants.DOCT_EXP_IDX])),\
+    doctor[constants.DOCT_ACCUMULATOR_IDX],\
+    doctor[constants.DOCT_LASTREST_IDX],\
     doctor[constants.DOCT_NAME_IDX]))
 
     return sorted_Doctors

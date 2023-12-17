@@ -42,7 +42,8 @@ def minutesToInt(time):
 
 def intToTime(hour, minutes, add0 = True):
     """
-    Converts the two int's given to a str in the format HHhMM, where H is hours and M minutes;
+    Converts the two int's given to a str in the format HHhMM, 
+    where H is hours and M minutes;
     If add0 = false there won't be added an extra 0 when HH < 10.
 
     Requires: 

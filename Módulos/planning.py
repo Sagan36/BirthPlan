@@ -84,13 +84,14 @@ def updateofFiles(doctors, requests, previousSched, nextTime):
 
 	#This analyzes the the list and takes that already happened.
 	for line in previousSched:               							           					
-		if dateTime.timeToMinutes(line[constants.SCHE_HOUR_IDX]) <= Total_Minutes: 		        	
+		if dateTime.timeToMinutes(line[constants.SCHE_HOUR_IDX])<=Total_Minutes: 		        	
 			copy_PreviouShed.remove(line)								    					 	
 	nextSched = copy_PreviouShed														            
                                                                                                     
 																								
 	for doctor in doctors:
-		if dateTime.timeToMinutes(doctor[constants.DOCT_LASTBIRTH_IDX]) < dateTime.timeToMinutes(nextTime):
+		if dateTime.timeToMinutes(doctor[constants.DOCT_LASTBIRTH_IDX]) \
+		< dateTime.timeToMinutes(nextTime):
 			doctor[constants.DOCT_LASTBIRTH_IDX] = nextTime
 	#Assigns a doctor to a mother 
 	while len(requests) != 0:
@@ -103,16 +104,21 @@ def updateofFiles(doctors, requests, previousSched, nextTime):
 					if doctor[constants.DOCT_EXP_IDX] == "3" or \
 						doctor[constants.DOCT_EXP_IDX] == "2":
 						sched.append([doctor[constants.DOCT_LASTBIRTH_IDX],\
-						next_mother[constants.MOTH_NAME_IDX],doctor[constants.DOCT_NAME_IDX]])
+						              next_mother[constants.MOTH_NAME_IDX],\
+							          doctor[constants.DOCT_NAME_IDX]])
 						chosen_doctor = doctor
 						needsAssis = False
 				else:
-					sched.append([doctor[constants.DOCT_LASTBIRTH_IDX],next_mother[constants.MOTH_NAME_IDX],doctor[constants.DOCT_NAME_IDX]])
+					sched.append([doctor[constants.DOCT_LASTBIRTH_IDX],\
+				                  next_mother[constants.MOTH_NAME_IDX],\
+						          doctor[constants.DOCT_NAME_IDX]])
+
 					chosen_doctor = doctor
 					needsAssis = False		
 		#if there isnt any doctors to attend the mother
 		if len(doctors) == 0:
-			temp = [nextTime,next_mother[constants.MOTH_NAME_IDX],"redirected to other network"]
+			temp = [nextTime,next_mother[constants.MOTH_NAME_IDX],\
+		                    		"redirected to other network"]
 			sched.append(temp)
 		else:
 			#Add 20 minutes to the chosen_doctor's last appointment time
