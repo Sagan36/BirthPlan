@@ -5,6 +5,7 @@
 # 62214 Luís Lima
 # 62269 Dinis Garcia
 
+
 import constants
 import dateTime
 
@@ -18,7 +19,7 @@ def updateHeader(fileName):
     fileName is the name of a non-empty .txt file.
     Ensures:
     Adds 30 minutes to the hours in the header of the file and returns
-    it as a str 
+    it as a str.
     """
     fp = open(fileName,"r", encoding = "utf-8")
     fileList = fp.readlines()
@@ -35,6 +36,7 @@ def updateHeader(fileName):
         headerStr += i
     
     fp.close()
+
     return headerStr
 
 

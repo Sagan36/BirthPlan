@@ -14,7 +14,17 @@ import copy
 
 
 def add20Minutes(doctor, doctorsList, docsOnBreak):
+	"""
+	Increments 20 minutes on all the times of the doctor.
 
+	Requires:
+	doctor is a list containing all the infos of the doctor;
+	doctorsList is a list of list of all the infos of the doctors;
+	docsOnBreak is a list of all the doctors on weekly leave.
+	Ensures:
+	Add 20 minutes to all the times of the doctor and returns
+	the updated docsOnBreak list. 
+	"""
 	lastAssis = doctor[constants.DOCT_LASTBIRTH_IDX ]
 	dayBreak = int(doctor[constants.DOCT_ACCUMULATOR_IDX])
 	weekBreak = doctor[4]
@@ -120,4 +130,5 @@ def updateofFiles(doctors, requests, previousSched, nextTime):
 
 	nextDoctors = doctors + docsOnBreak
 	nextDoctors.sort(key=lambda x: x[constants.DOCT_NAME_IDX])
+	
 	return nextSched, nextDoctors

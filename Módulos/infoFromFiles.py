@@ -13,16 +13,14 @@ import constants
 
 def removeHeader(fileOpen):
     '''
-    Removes the lines of the header of the fileName
-    
+    Removes the lines of the header of the fileName.
+
     Requires: 
     fileOpen to be a file pointer of an existing .txt file.
-    The enconding used in opening is utf-8
     Ensures: 
     Returns the lines of the file excluding the first 7 lines
     that contains the header.
     '''
-
     allLines = fileOpen.readlines()
     noHeaderLines = allLines[constants.NUM_HEADER_LINES:]
     
@@ -49,7 +47,7 @@ def readDoctorsFile(fileName):
     
     DoctorsList=[]
     for line in inFile:
-        if line.strip():#If there are any empty lines,it removes them.
+        if line.strip():#If there are any empty lines, it removes them.
             doctorInfo = line.rstrip().split(", ")
             DoctorsList.append(doctorInfo)
     
@@ -66,7 +64,7 @@ def readRequestsFile(fileName):
     a list of pending requests organized as in the examples provided in
     the general specification (omitted here for the sake of readability).
     Ensures:
-    list of lists where each list corresponds to a request listed in
+    List of lists where each list corresponds to a request listed in
     the file fileName (with all the info pieces belonging to that resquest),
     following the order provided in the lines of the file.
     """
@@ -117,7 +115,7 @@ def sortMothers(sortedMoms):
     sortedMoms is a list of lists that came from 
     the function readRequestsFile.
     Ensures:
-    Returns list of requests sorted by Risk -> Urgency -> Age -> Name
+    Returns list of requests sorted by Risk -> Urgency -> Age -> Name.
     '''
     #Assign values to the strings to match the sort we want.
     Color_Order = {"red":1, "yellow":2, "green":3}
@@ -138,7 +136,7 @@ def sortDoctors(sorted_Doctors):
     the function readDoctorsFile.
     Ensures:
     Returns list of doctors sorted 
-    by First- -> Experience -> Time-to-Break -> Name
+    by First Available -> Experience -> Time-to-Break -> Name.
     '''
     sorted_Doctors.sort(key=lambda doctor: (dateTime.timeToMinutes \
     (doctor[constants.DOCT_LASTBIRTH_IDX]), (-int(doctor[constants.DOCT_EXP_IDX])),\
@@ -149,10 +147,9 @@ def sortDoctors(sorted_Doctors):
 
 
 
-def type_Header(fileName):
+def typeHeader(fileName):
     '''
-    Analyzes the header of a file in 
-    search of his type.
+    Analyzes the header of a file in search of his type.
 
     Requires:
     fileName is str with the name of a .txt file containing
@@ -163,7 +160,6 @@ def type_Header(fileName):
     inFile = open(fileName,"r", encoding = "utf-8")       
 
     allLines = inFile.readlines()
-
     FileType = allLines[constants.TYPE_HEADER] 
     
     FileType = FileType[:-2]

@@ -11,8 +11,6 @@
 # You should define here as many constants as you need to keep your 
 # code clean and legible
 
-
-
 # Value for weekly pause in the output schedule
 WKL_LEAVE = "weekly leave"
 
@@ -24,32 +22,36 @@ TYPE_HEADER = 6
 NUM_HEADER_LINES = 7
 # Index of line with hour of last refresh
 HOUR_LINE_IDX = 3
-#Number of characters correponding to the hour in a file's name + ".txt":
+# Number of characters correponding to the hour in a file's name + ".txt":
 NAME_HOUR_CHAR = -9 #Last 9 digits
 
 
 # In a doctor's list:
-# Index of the element with the docotor's name
+# Index of the element with the doctor's name
 DOCT_NAME_IDX = 0
-DOCT_EXP_IDX = 1 
+# Index of the element with the doctor's experience
+DOCT_EXP_IDX = 1
+# Index of the element with the doctor's last birth
 DOCT_LASTBIRTH_IDX = 2
-DOCT_ACCUMULATOR_IDX = 3 #as horas e os minutos acumulados desde o último descanso semanal, relativos aos partos que lhes estão atribuídos e que está a realizar ou ainda vai realizar
-DOCT_LASTREST_IDX = 4 #; as horas e os minutos acumulados desde o último descanso semanal, relativos aos partos que lhes estão atribuídos e que está a realizar ou ainda vai realizar 
+# Index of the element with the doctor's acumulated daily hours
+DOCT_ACCUMULATOR_IDX = 3 
+# Index of the element with the doctor's last weekly break
+DOCT_LASTREST_IDX = 4
 
 # In a mother's list:
 # Index of the element with the mother's name
 MOTH_NAME_IDX = 0
+# Index of the element with the mother's age
 MOTH_AGE_IDX = 1
+# Index of the element with the mother's bracelet color
 MOTH_COLOR_IDX = 2
+# Index of the element with the mother's childbirth risk
 MOTH_RISK_IDX = 3
 
-#schedule constants 
-
+# In a schedule's list:
+# Index of the element with the planned hour of assistance
 SCHE_HOUR_IDX = 0
+# Index of the element with the name of the mother
 SCHE_MOTHER_IDX = 1
+# Index of the element with the name of the mother
 SCHE_DOCTOR_IDX = 2
-SCHE_HOUROFTHEHEADER_IDX = 3
-
-
-
-
