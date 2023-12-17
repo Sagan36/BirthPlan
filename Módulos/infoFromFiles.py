@@ -153,7 +153,7 @@ def type_Header(fileName):
 
     FileType = allLines[constants.TYPE_HEADER] 
     
-    FileType = FileType[0:8]
+    FileType = FileType[:-2]
     inFile.close()
 
     return FileType

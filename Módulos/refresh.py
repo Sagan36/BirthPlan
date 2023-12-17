@@ -39,17 +39,22 @@ def plan(doctorsFileName, scheduleFileName, requestsFileName):
     scheduleFileName and requestsFileName, and are written in the same directory
     of the latter.
     """
-    HeaderType_Doctors = infoFromFiles.type_Header(doctorsFileName)
-    HeaderType_Requests =  infoFromFiles.type_Header(requestsFileName)
-    HeaderType_Schedule = infoFromFiles.type_Header(scheduleFileName)
+    headerType_Doctors = infoFromFiles.type_Header(doctorsFileName)
+    headerType_Requests =  infoFromFiles.type_Header(requestsFileName)
+    headerType_Schedule = infoFromFiles.type_Header(scheduleFileName)
 
 
-    if HeaderType_Doctors[0:7].lower() != doctorsFileName[-16:-9]:
-       raise IOError("File head error: scope inconsistency between name and header in file doctorsFileName.")
-    if HeaderType_Requests.lower() == requestsFileName[-17:-9]:
-       raise IOError("File head error: scope inconsistency between name and header in file requestsFileName.")
-    if HeaderType_Schedule.lower() != scheduleFileName[-17:-9]:
-       raise IOError("File head error: scope inconsistency between name and header in file scheduleFileName.")
+    if headerType_Doctors.lower() != "doctors":
+      message = "File head error: scope inconsistency between name and header in file " + doctorsFileName + "."
+      raise IOError(message)
+    
+    if headerType_Requests.lower() != "mothers":
+      message = "File head error: scope inconsistency between name and header in file " + requestsFileName + "."
+      raise IOError(message)
+    
+    if headerType_Schedule.lower() != "schedule":
+      message = "File head error: scope inconsistency between name and header in file " + scheduleFileName + "."
+      raise IOError(message)
 
          
 
@@ -63,20 +68,24 @@ def plan(doctorsFileName, scheduleFileName, requestsFileName):
     previousDoctors_Sorted = infoFromFiles.sortDoctors(previousDoctors)
     previousRequests_Sorted = infoFromFiles.sortMothers(previousRequests)
 
-    newSched, newDocs = planning.updateSchedule(previousDoctors_Sorted, previousRequests_Sorted, previousSched, nextHour)
+    newSched, newDocs = planning.updateofFiles(previousDoctors_Sorted, previousRequests_Sorted, previousSched, nextHour)
 
-    SchedHeader = infoToFiles.updateHeader(scheduleFileName)
-    SchedName = infoToFiles.updatedName(scheduleFileName)
+    schedHeader = infoToFiles.updateHeader(scheduleFileName)
+    schedName = infoToFiles.updatedName(scheduleFileName)
 
-    DocsHeader = infoToFiles.updateHeader(doctorsFileName)
-    DocsName = infoToFiles.updatedName(doctorsFileName)
+    docsHeader = infoToFiles.updateHeader(doctorsFileName)
+    docsName = infoToFiles.updatedName(doctorsFileName)
 
     
-    infoToFiles.writeScheduleFile(newSched,SchedHeader, "teste_sched.txt")
-    infoToFiles.writeDoctorsFile(newDocs,DocsHeader, "teste_docs.txt")
+    infoToFiles.writeScheduleFile(newSched,schedHeader, schedName)
+    infoToFiles.writeDoctorsFile(newDocs,docsHeader, docsName)
 
 
-if __name__ == "__main__":
-   import sys
-   plan(sys.argv[1],sys.argv[2],sys.argv[3])     
+# if __name__ == "__main__":
+#    import sys
+#    plan(sys.argv[1],sys.argv[2],sys.argv[3])     
 
+plan("testSets_v2/testSets_v2/testSet1/doctors10h00.txt", "testSets_v2/testSets_v2/testSet1/schedule10h00.txt", "testSets_v2/testSets_v2/testSet1/requests10h30.txt")
+plan("testSets_v2/testSets_v2/testSet2/doctors14h00.txt", "testSets_v2/testSets_v2/testSet2/schedule14h00.txt", "testSets_v2/testSets_v2/testSet2/requests14h30.txt")
+plan("testSets_v2/testSets_v2/testSet3/doctors16h00.txt", "testSets_v2/testSets_v2/testSet3/schedule16h00.txt", "testSets_v2/testSets_v2/testSet3/requests16h30.txt")
+plan("testSets_v2/testSets_v2/testSet4/doctors18h00.txt", "testSets_v2/testSets_v2/testSet4/schedule18h00.txt", "testSets_v2/testSets_v2/testSet4/requests18h30.txt")

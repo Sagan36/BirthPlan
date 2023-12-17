@@ -83,7 +83,7 @@ def updateofFiles(doctors, requests, previousSched, nextTime):
 	#Assigns a doctor to a mother 
 	while len(requests) != 0:
 		needsAssis = True
-		next_mother = requests[constants.MOTH_AGE_IDX]
+		next_mother = requests[0]
 		for doctor in doctors:
 			if needsAssis:
 				#High risk mothers
