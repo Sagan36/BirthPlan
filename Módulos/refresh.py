@@ -82,10 +82,3 @@ def plan(doctorsFileName, scheduleFileName, requestsFileName):
    
    infoToFiles.writeScheduleFile(newSched,schedHeader, schedName)
    infoToFiles.writeDoctorsFile(newDocs,docsHeader, docsName)
-
-    
-
-plan("testSets_v2/testSets_v2/testSet1/doctors10h00.txt", "testSets_v2/testSets_v2/testSet1/schedule10h00.txt", "testSets_v2/testSets_v2/testSet1/requests10h30.txt")
-plan("testSets_v2/testSets_v2/testSet2/doctors14h00.txt", "testSets_v2/testSets_v2/testSet2/schedule14h00.txt", "testSets_v2/testSets_v2/testSet2/requests14h30.txt")
-plan("testSets_v2/testSets_v2/testSet3/doctors16h00.txt", "testSets_v2/testSets_v2/testSet3/schedule16h00.txt", "testSets_v2/testSets_v2/testSet3/requests16h30.txt")
-plan("testSets_v2/testSets_v2/testSet4/doctors18h00.txt", "testSets_v2/testSets_v2/testSet4/schedule18h00.txt", "testSets_v2/testSets_v2/testSet4/requests18h30.txt")
