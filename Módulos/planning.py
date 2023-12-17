@@ -120,7 +120,6 @@ def updateofFiles(doctors, requests, previousSched, nextTime):
 			docsOnBreak = add20Minutes(chosen_doctor, doctors, docsOnBreak)
 			infoFromFiles.sortDoctors(doctors)
 
-		#Remover o pedido pendente da mãe
 		requests.remove(next_mother)
 		
 
