@@ -80,13 +80,13 @@ def writeScheduleFile(sched, header, fileName):
     the assistances as ordered head to tail in sched.
     """
     schedStr=str()
-    for i in sched:
-        for j in i:
+    for scheduled in sched:
+        for info in scheduled:
             
-            if j != i[0]:
+            if info !=  scheduled[constants.SCHE_HOUR_IDX]:
                 schedStr += ", "
             schedStr = schedStr + j
-        if i != sched[-1]:
+        if  scheduled != sched[-1]:
             schedStr += "\n"
 
     allLines = header + schedStr
@@ -115,13 +115,13 @@ def writeDoctorsFile(doctors, header, fileName):
     the statistics as ordered head to tail in doctors.
     """
     docStr=str()
-    for i in doctors:
-        for j in i:
+    for doctor in doctors:
+        for info in doctor:
             
-            if j != i[0]:
+            if info != doctor[constants.DOCT_NAME_IDX]:
                 docStr += ", "
             docStr = docStr + j
-        if i != doctors[-1]:
+        if doctor != doctors[-1]:
             docStr += "\n"
 
     allLines = header + docStr
