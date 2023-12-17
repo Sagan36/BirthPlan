@@ -6,9 +6,11 @@
 # 62269 Dinis Garcia
 
 
-
 import dateTime
 import constants
+
+
+
 def removeHeader(fileOpen):
     '''
     Removes the lines of the header of the fileName
@@ -27,6 +29,7 @@ def removeHeader(fileOpen):
     fileOpen.close()
 
     return noHeaderLines
+
 
 
 def readDoctorsFile(fileName):
@@ -167,5 +170,3 @@ def type_Header(fileName):
     inFile.close()
 
     return FileType
-
-print(type_Header())

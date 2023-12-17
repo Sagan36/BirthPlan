@@ -4,6 +4,8 @@
 # Grupo 160
 # 62214 Luís Lima
 # 62269 Dinis Garcia
+
+
 import infoFromFiles
 import constants
 import dateTime
@@ -22,7 +24,7 @@ def add20Minutes(doctor, doctorsList, docsOnBreak):
 	minutes = dateTime.timeToMinutes(lastAssis)
 	minutes += 20
 	dayBreak += 20
-	if dayBreak >= 240:
+	if dayBreak >= 240 and dayBreak < 260:
 		minutes += 60
 	doctor[constants.DOCT_ACCUMULATOR_IDX] = str(dayBreak)
 	doctor[constants.DOCT_LASTBIRTH_IDX] = dateTime.minutesToTime(minutes)
@@ -119,11 +121,3 @@ def updateofFiles(doctors, requests, previousSched, nextTime):
 	nextDoctors = doctors + docsOnBreak
 	nextDoctors.sort(key=lambda x: x[constants.DOCT_NAME_IDX])
 	return nextSched, nextDoctors
-
-
-
-doctors = infoFromFiles.readDoctorsFile("testSets_v2/testSets_v2/testSet1/doctors10h00.txt")
-requests = infoFromFiles.readRequestsFile("testSets_v2/testSets_v2/testSet1/requests10h30.txt")
-previousSched = infoFromFiles.readScheduleFile("testSets_v2/testSets_v2/testSet1/schedule10h00.txt")
-nextHour = dateTime.getHeaderHour("testSets_v2/testSets_v2/testSet1/requests10h30.txt")
-

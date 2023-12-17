@@ -85,7 +85,7 @@ def writeScheduleFile(sched, header, fileName):
             
             if info !=  scheduled[constants.SCHE_HOUR_IDX]:
                 schedStr += ", "
-            schedStr = schedStr + j
+            schedStr = schedStr + info
         if  scheduled != sched[-1]:
             schedStr += "\n"
 
@@ -120,7 +120,7 @@ def writeDoctorsFile(doctors, header, fileName):
             
             if info != doctor[constants.DOCT_NAME_IDX]:
                 docStr += ", "
-            docStr = docStr + j
+            docStr = docStr + info
         if doctor != doctors[-1]:
             docStr += "\n"
 

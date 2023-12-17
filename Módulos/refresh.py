@@ -6,16 +6,13 @@
 # 75001 Maria Marisa
 
 
-# if __name__ == "__main__":
-#   import sys
-#   plan(sys.argv[1],sys.argv[2],...)
-#[refresh.py, arg1, arg2, etc...]
-
 import constants
 import dateTime
 import infoFromFiles
 import planning
 import infoToFiles
+
+
 
 def plan(doctorsFileName, scheduleFileName, requestsFileName):
     """
@@ -39,6 +36,7 @@ def plan(doctorsFileName, scheduleFileName, requestsFileName):
     scheduleFileName and requestsFileName, and are written in the same directory
     of the latter.
     """
+
     headerType_Doctors = infoFromFiles.type_Header(doctorsFileName)
     headerType_Requests =  infoFromFiles.type_Header(requestsFileName)
     headerType_Schedule = infoFromFiles.type_Header(scheduleFileName)
